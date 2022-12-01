@@ -25,5 +25,6 @@ print_info() {
 separator=" => "
 color_blocks="off"
 shell_version="off"
-image_backend="alacritty"
+image_backend="kitty"
+image_source="$NIX_CONFIG_DIR/user/image/pic/arch.png"
 ''

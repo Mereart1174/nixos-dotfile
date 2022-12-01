@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, lib, config, ... }:
 
 with lib;
 let
@@ -7,7 +7,6 @@ in {
     options.modules.neofetch = { enable = mkEnableOption "neofetch"; };
 
     config = mkIf cfg.enable {
-        home.packages = [ pkgs.neofetch ];
         home.file.".config/neofetch/config.conf".text = import ../extraConfig/neofetch.style;
    };
 }

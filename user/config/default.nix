@@ -11,7 +11,10 @@ in {
     config.modules = {
         zsh.enable = true;
         starship.enable = true;
-        git.enable = true;
+        # git.enable = true;
         neofetch.enable = true;
+        # wlogout.enable = true;
+        # wayland.windowManager.hyprland.enable = true;
+        waybar.enable = true;
     };
 }

@@ -16,12 +16,12 @@ in {
                 autoload -Uz compinit && compinit -u
                 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
             '';
-            loginExtra = ''
-                VISUAL="nvim --noplugin"
-                BAT_THEME="Dracula"
-                MANPAGER="sh -c 'col -bx | bat -l man -p'"
-                MANROFFOPT="-c"
-            '';
+            sessionVariables = {
+                BAT_THEME = "Dracula";
+                MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+                MANROFFOPT = "-c";
+                NIX_CONFIG_DIR = "/home/mere/.config/nixpkgs";
+            };
             initExtra = ''
                 ex ()
                 {
@@ -81,7 +81,7 @@ in {
                 np = "nvim $NIX_CONFIG_DIR/user/Philomatics.nix";
                 nl = "neofetch";
                 cn = "cd $NIX_CONFIG_DIR";
-                nf = "nvim $NIX_CONFIG_DIR/user/flake.nix";
+                nf = "nvim $NIX_CONFIG_DIR/flake.nix";
                 tq = "curl wttr.in";
                 fy = "trans :zh-CN";
                 pi = "curl cip.cc";
@@ -107,6 +107,7 @@ in {
                 cman = "man -M /usr/share/man/zh_CN";
                 plog = "bat /var/log/pacman.log | rg 'installed|reinstalled|removed|downgraded|upgraded'";
                 httpser = "npx http-server";
+                ce = "nvim ~/Mygits/Learning/CE/common.md";
             };
         };
     };

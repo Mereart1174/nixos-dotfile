@@ -8,7 +8,6 @@ in {
 
     config = mkIf cfg.enable {
         home.file.".config/waybar/style.css".text = import ../extraConfig/waybar.style;
-        home.packages = [ waybar ];
         programs.waybar = {
             enable = true;
             settings = {

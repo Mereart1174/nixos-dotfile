@@ -7,7 +7,6 @@ in {
     options.modules.starship = { enable = mkEnableOption "starship"; };
 
     config = mkIf cfg.enable {
-        home.packages = [ pkgs.starship ];
         programs.starship = {
             enable = true;
             settings = {

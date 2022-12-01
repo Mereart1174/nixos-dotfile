@@ -1,0 +1,54 @@
+''
+* {
+	background-image: none;
+}
+window {
+	background-color: rgba(0, 0, 0, 0);
+}
+button {
+    color: #FFFFFF;
+    font-family: "monospace";
+	background-color: #1A1B26;
+
+    border-radius: 0px;
+	border-style: none;
+	border-width: 0px;
+	
+    background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25%;
+}
+
+button:focus, button:active, button:hover {
+	background-color: #7AA2F7;
+	outline-style: solid;
+}
+
+#locak, #logout, #suspend, #hibernate, #shutdown, #reboot {
+    opacity: 0.9;
+}
+
+#lock {
+    background-image: image(url("$NIX_CONFIG_DIR/user/image/wlogout/lock.png"));
+}
+
+#logout {
+    background-image: image(url("$NIX_CONFIG_DIR/user/image/wlogout/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("$NIX_CONFIG_DIR/user/image/wlogout/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("$NIX_CONFIG_DIR/user/image/wlogout/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("$NIX_CONFIG_DIR/user/image/wlogout/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("$NIX_CONFIG_DIR/user/image/wlogout/reboot.png"));
+}
+''

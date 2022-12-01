@@ -1,4 +1,4 @@
-{ config, lib, inputs, pkgs, ...}:
+{ inputs, pkgs, lib, config, ... }:
 
 {
     home.username = "mere";
@@ -13,27 +13,31 @@
     imports = [ ./config/default.nix ];
 
     home.packages = with pkgs; [
+        # unfree pkgs
+            # unrar
+        # systemctl pkgs
+            # easyeffects unzip git minizip
+        # unconfig pkgs
+            # neovim
+
         # Command Line
+            # alacritty
+        kitty
         hyfetch
-        exa ripgrep bat fd btop neofetch du-dust ranger
-        minizip # unrar unzip neovim 
-        git easyeffects
-        zsh starship
-        alacritty
+        exa ripgrep bat fd btop du-dust bottom
+        zsh neofetch starship ranger
             # doas openssh
 
         # Development Tools
-            # rustup
-            # llvm
-            # qemu_full
+            # rustup llvm qemu_full
 
         # Desktop Application
         hyprland waybar
         swaylock wlogout
+        rofi mako mpv imv swaybg mpvpaper
         wl-clipboard wlsunset
             # firefox
-        rofi wofi mako mpv imv swaybg mpvpaper
-        # brightnessctl
+            # brightnessctl
             # wayfire wf-config wlroots
             # vulkan-tools
             # virt-manager
