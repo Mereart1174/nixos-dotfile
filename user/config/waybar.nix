@@ -1,33 +1,61 @@
-{ pkgs, lib, config, fetchzip, inputs, ... }:
+{ lib, config, ... }:
 
-with lib;
 let
     cfg = config.modules.waybar;
 in {
-    options.modules.waybar = { enable = mkEnableOption "waybar"; };
+    options.modules.waybar = { enable = lib.mkEnableOption "waybar"; };
 
-    config = mkIf cfg.enable {
-        home.file.".config/waybar/style.css".text = import ../extraConfig/waybar.style;
+    config = lib.mkIf cfg.enable {
+        home.file.".config/waybar/style.css".source = ../extraConfig/waybar.style;
         programs.waybar = {
             enable = true;
             settings = {
                 mainBar = {
                     layer = "top";
+                    position = "top";
                     modules-left = [
                         "custom/launcher"
+                        "custom/updates"
                         "cpu"
                         "memory"
                         "tray"
                     ];
-                    modules-center = [ "sway/workspaces" ];
+                    modules-center = [ "wlr/workspaces" ];
                     modules-right = [
+                        "network"
                         "backlight"
                         "pulseaudio"
+                        "bluetooth"
                         "clock"
                         "battery"
-                        "custom/power"
                     ];
-                    "sway/workspaces" = {
+                    "custom/launcher" = {
+                        format = " ";
+                        on-click = "rofi -show drun";
+                        on-click-right = "killall rofi";
+                    };
+                    "custom/updates" = {
+                        exec = "(pacman -Qu) | wc -l";
+                        interval = 3600;
+                        format = "📥︎ {}";
+                        on-click = "notify-send '更新结束'";
+                    };
+                    cpu = {
+                        interval = 3;
+                        format = "  {}%";
+                        max-length = 10;
+                    };
+                    memory = {
+                        interval = 3;
+                        format = "  {}%";
+                        max-length = 10;
+                    };
+                    tray = {
+                        icon-size = 18;
+                        spacing = 10;
+                    };
+
+                    "wlr/workspaces" = {
                         disable-scroll = false;
                         all-outputs = true;
                         format = "{icon}";
@@ -39,6 +67,8 @@ in {
                             "5" = [];
                             "6" = [];
                             "7" = [];
+                            "8" = [];
+                            "9" = [];
                         };
                         format-icons = {
                             default = " ";
@@ -51,60 +81,55 @@ in {
                             "5" = "";
                             "6" = "";
                             "7" = "";
+                            "8" = "";
+                            "9" = "";
                         };
                         icon-size = 14;
                     };
-                    "custom/power" = {
-                        tooltip = false;
-                        format = "襤";
-                        on-click = "wlogout &";
-                    };
-                    "custom/launcher" = {
-                        format = " ";
-                        on-click = "rofi -show drun";
-                        on-click-right = "killall rofi";
-                    };
+
                     network = {
+                        interval = 3;
                         tooltip = false;
-                        format-wifi = "  {essid}";
+                        format-wifi = "⥣ {bandwidthUpBits} ⥥ {bandwidthDownBits}";
+                        tooltip-format-wifi = "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength:
+                        {signalStrength}%\nFreq: {frequency}MHz";
                     };
                     backlight = {
-                        interval = 1;
-                        tooltip = false;
                         format = " {}%";
+                        on-scroll-up = "brightnessctl set +1%";
+                        on-scroll-down = "brightnessctl set 1%-";
+                    };
+                    pulseaudio = {
+                        on-click = "pamixer -t";
+                        on-scroll-up =  "pamixer -i 1";
+                        on-scroll-down =  "pamixer -d 1";
+                        scroll-step = 1;
+                        format = "{icon} {volume}%";
+                        format-muted = "🔇";
+                        format-icons = { default = ["" "" ""]; };
+                    };
+                    clock = { format = "{:  %R    %m/%d}"; };
+                    bluetooth = {
+                        format = " {status}";
+                        format-connected = " ";
+                        on-click = "blueberry";
                     };
                     battery = {
                         states = {
-                            good = 95;
+                            good = 80;
                             warning = 30;
                             critical = 20;
                         };
                         format = "{icon}    {capacity}%";
-                        format-charging = "🕯️ ⚡ {capacity}%";
-                        format-plugged = "  {capacity}%";
+                        format-charging = "🕯️ {capacity}%";
+                        format-plugged = "🕯️ {capacity}%";
                         format-alt = "{time} {icon}";
                         format-icons = ["" "" "" "" ""];
                     };
-                    tray = {
-                        icon-size = 18;
-                        spacing = 10;
-                    };
-                    clock = { format = "{:  %R    %m/%d}"; };
-                    cpu = {
-                        interval = 15;
-                        format = "  {}%";
-                        max-length = 10;
-                    };
-                    memory = {
-                        interval = 30;
-                        format = "  {}%";
-                        max-length = 10;
-                    };
-                    pulseaudio = {
-                        scroll-step = 5;
+                    "custom/power" = {
                         tooltip = false;
-                        format = "{icon} {volume}%";
-                        format-icons = { default = ["" "" ""]; };
+                        format = " ";
+                        on-click = "wlogout &";
                     };
                 };
             };

@@ -1,12 +1,11 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 
-with lib;
 let
     cfg = config.modules.git;
 in {
-    options.modules.git = { enable = mkEnableOption "git"; };
+    options.modules.git = { enable = lib.mkEnableOption "git"; };
 
-    config = mkIf cfg.enable {
+    config = lib.mkIf cfg.enable {
         programs.git = {
             enable = true;
             userName = "Mereart";
@@ -14,7 +13,6 @@ in {
             extraConfig = {
                 init = { defaultBranch = "main"; };
                 delta = {
-                    syntax-theme = "Nord";
                     line-numbers = true;
                 };
             };

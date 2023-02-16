@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, input, ... }:
 
 let
     folder = ./.;
@@ -8,13 +8,38 @@ let
 in {
     inherit imports;
 
-    config.modules = {
-        zsh.enable = true;
-        starship.enable = true;
-        # git.enable = true;
-        neofetch.enable = true;
-        # wlogout.enable = true;
-        # wayland.windowManager.hyprland.enable = true;
-        waybar.enable = true;
+    home = {
+        username = "phil";
+        homeDirectory = "/home/phil";
     };
+
+    programs.home-manager.enable = true;
+
+    home.stateVersion = "22.11";
+
+    home.packages = with pkgs; [
+        # Command Line Tools
+        neovim
+        ranger neofetch starship
+        exa ripgrep bat fd zoxide
+        du-dust bottom btop ranger
+        git doas curl wget clash
+
+        # Development Tools
+            # rustup llvm qemu_full
+            # python3
+
+        # Desktop Application
+        alacritty
+        easyeffects
+        firefox-wayland
+        mpv mpvpaper imv
+        rofi dunst
+        swaylock-effects wlogout
+        wl-clipboard wlsunset
+        brightnessctl pamixer
+        hyprland wayfire
+        waybar cava # swww
+            # virt-manager
+    ];
 }

@@ -1,12 +1,11 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 
-with lib;
 let
     cfg = config.modules.zsh;
 in {
-    options.modules.zsh = { enable = mkEnableOption "zsh"; };
+    options.modules.zsh = { enable = lib.mkEnableOption "zsh"; };
 
-    config = mkIf cfg.enable {
+    config = lib.mkIf cfg.enable {
         programs.zsh = {
             enable = true;
             enableCompletion = true;
@@ -17,12 +16,25 @@ in {
                 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
             '';
             sessionVariables = {
+                EDITOR="nvim --noplugin";
+                PAGER="less";
+                TERMINAL = "alacritty";
+                BROWSER = "firefox";
                 BAT_THEME = "Dracula";
                 MANPAGER = "sh -c 'col -bx | bat -l man -p'";
                 MANROFFOPT = "-c";
-                NIX_CONFIG_DIR = "/home/mere/.config/nixpkgs";
+                NIX_CONFIG_DIR = "/home/phil/.config/nixos";
+            NIXOS_CONFIG = "$HOME/.config/nixos/system/nixosConfig.nix";
             };
             initExtra = ''
+                eval "$(starship init zsh)"
+                eval "$(zoxide init zsh)"
+                eval "$(direnv hook zsh)"
+
+                setopt hist_save_no_dups
+                setopt hist_ignore_dups
+                setopt hist_ignore_space
+
                 ex ()
                 {
                     if [ -f $1 ] ; then
@@ -47,7 +59,7 @@ in {
             history = {
                 save = 10000;
                 size = 10000;
-                path = "$HOME/.config/history";
+                path = "$HOME/.config/zsh/zsh_history";
                 expireDuplicatesFirst = true;
                 ignoreDups = true;
                 ignoreSpace = true;
@@ -76,9 +88,11 @@ in {
                 lsss = "exa --icons --group-directories-first --tree";
                 hg = "history 1 | grep";
 
-                sz = "home-manager switch --flake $NIX_CONFIG_DIR";
+                # sz = "home-manager switch --flake $NIX_CONFIG_DIR";
+                sz = "doas nixos-rebuild switch --flake $NIX_CONFIG_DIR#magicbook";
                 nz = "nvim $NIX_CONFIG_DIR/user/config/zsh.nix";
                 np = "nvim $NIX_CONFIG_DIR/user/Philomatics.nix";
+                nh = "nvim $NIX_CONFIG_DIR/user/extraConfig/hyprland.conf";
                 nl = "neofetch";
                 cn = "cd $NIX_CONFIG_DIR";
                 nf = "nvim $NIX_CONFIG_DIR/flake.nix";
@@ -86,27 +100,9 @@ in {
                 fy = "trans :zh-CN";
                 pi = "curl cip.cc";
 
-                # Arch Linux
-                sb = "sudo systemctl start bluetooth";
-                vm = "sudo systemctl start libvirtd; sudo virsh net-start default";
-                kt = "kill -9 `pidof TIM.exe`";
                 fq = "export http_proxy=127.0.0.1:7890; export https_proxy=127.0.0.1:7890";
-                cq = "cd /home/mere/.deepinwine/Deepin-TIM/dosdevices/c:/users/mere/My\ Documents/Tencent\ Files/2660507921/FileRecv/";
-                sp = "doas pacman";
-                syu = "doas pacman -Syu";
-                sps = "doas pacman -S";
-                spq = "pacman -Q";
-                spss = "pacman -Ss";
                 spnn = "nix search nixpkgs";
                 sc = "sudo systemctl";
-                vmo = "sudo virsh start";
-                vmp = "sudo virsh shutdown";
-                de = "conda deactivate";
-                py38 = "source /opt/miniconda/bin/activate py38";
-                py10 = "source /opt/miniconda/bin/activate py10";
-                cman = "man -M /usr/share/man/zh_CN";
-                plog = "bat /var/log/pacman.log | rg 'installed|reinstalled|removed|downgraded|upgraded'";
-                httpser = "npx http-server";
                 ce = "nvim ~/Mygits/Learning/CE/common.md";
             };
         };

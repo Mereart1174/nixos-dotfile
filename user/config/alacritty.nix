@@ -1,12 +1,11 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 
-with lib;
 let
     cfg = config.modules.alacritty;
 in {
-    options.modules.alacritty = { enable = mkEnableOption "alacritty"; };
+    options.modules.alacritty = { enable = lib.mkEnableOption "alacritty"; };
 
-    config = mkIf cfg.enable {
+    config = lib.mkIf cfg.enable {
         programs.alacritty = {
             enable = true;
             settings = {
@@ -27,18 +26,19 @@ in {
                         family = "LXGW WenKai Mono";
                         style = "Bold Italic";
                     };
-                    size = 23.0;
+                    size = 28.0;
                 };
                 window = {
                     decorations = "none";
                     dynamic_padding = false;
-                    opacity = 0.9;
+                    opacity = 0.6;
                     dimensions = {
                         lines = 29;
                         columns = 88;
                     };
                     padding = {
-                        x = 255;
+                        # x = 255;
+                        x = 30;
                         y = 0;
                     };
                 };

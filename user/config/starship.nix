@@ -1,19 +1,18 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
 
-with lib;
 let
     cfg = config.modules.starship;
 in {
-    options.modules.starship = { enable = mkEnableOption "starship"; };
+    options.modules.starship = { enable = lib.mkEnableOption "starship"; };
 
-    config = mkIf cfg.enable {
+    config = lib.mkIf cfg.enable {
         programs.starship = {
             enable = true;
             settings = {
                 add_newline = false;
                 username.disabled = false;
                 format = lib.concatStrings [
-                    "[╭─ ](bold black)[  ](#ffd866)"
+                    "[╭─ ](bold black)[ ](#ffd866)"
                     "$all"
                     "$fill"
                     "$time[ ♍](#bd93f9)$python"

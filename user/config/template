@@ -1,12 +1,11 @@
-{ pkgs, lib, config, ... }:
+{ lib, config, ... }:
+%s/PG//g
 
-with lib;
 let
     cfg = config.modules.PG;
-
 in {
-    options.modules.PG = { enable = mkEnableOption "PG"; };
+    options.modules.PG = { enable = lib.mkEnableOption "PG"; };
 
-    config = mkIf cfg.enable {
+    config = lib.mkIf cfg.enable {
     };
 }
