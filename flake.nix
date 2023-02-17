@@ -22,41 +22,28 @@
         };
     };
 
-    outputs = input @ { self, nixpkgs, ... }:
-        let
-            system = "x86_64-linux";
-            pkgs = nixpkgs.legacyPackages.${system};
-            lib = nixpkgs.lib;
+    outputs = input @ { self, nixpkgs, home-manager, ... }:
+    {
+        nixosConfigurations = {
+            nixos = nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                modules = [
+                    ./system/default.nix
+                    ./system/magicbook.nix
 
-            mkSystem = system: hostname:
-                lib.nixosSystem {
-                    system = system;
-                    modules = [
-                        { networking.hostName = hostname; }
-                        ./system/default.nix
-                        ./system/hardware/${hostname}.nix
+                    input.hyprland.nixosModules.default
+                    input.nur.nixosModules.nur
 
-                        input.hyprland.nixosModules.default
-                        input.nur.nixosModules.nur
-                        # ({ config, ... }:{
-                        #     environment.systemPackages = [ config.nur.repos.linyinfeng.clash-for-windows ];
-                        # })
-
-                        input.home-manager.nixosModules.home-manager
-                        {
-                            home-manager = {
-                                useUserPackages = true;
-                                useGlobalPkgs = true;
-                                extraSpecialArgs = { inherit input; };
-                                users.phil = (./. + "/user/Philomatics.nix");
-                            };
-                        }
-                    ];
-                    specialArgs = { inherit input; };
-                };
-        in {
-            nixosConfigurations = {
-                magicbook = mkSystem "x86_64-linux" "magicbook";
+                    home-manager.nixosModules.home-manager
+                    {
+                        home-manager = {
+                            useUserPackages = true;
+                            useGlobalPkgs = true;
+                            users.phil = (./. + "/user/Philomatics.nix");
+                        };
+                    }
+                ];
             };
         };
+    };
 }

@@ -1,4 +1,4 @@
-{ input, pkgs, lib, config, ... }:
+{ config, lib, pkgs, ... }:
 
 {
     nix = {
@@ -38,11 +38,11 @@
 
     boot = {
         initrd = {
-            kernelModules = [
-                "intel_agp" "i915"
-                "nvidia" "nvidia_modeset"
-                "nvidia_uvm" "nvidia_drm"
-            ];
+            # kernelModules = [
+            #     "intel_agp" "i915"
+            #     "nvidia" "nvidia_modeset"
+            #     "nvidia_uvm" "nvidia_drm"
+            # ];
             availableKernelModules = [ "xhci_pci" "nvme" "usbhid" ];
             systemd.enable = true;
             verbose = false;
@@ -77,6 +77,7 @@
 
     networking = {
         networkmanager.enable = true;
+	hostName = "Philomatics";
     };
 
     services = {

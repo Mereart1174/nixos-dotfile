@@ -1,4 +1,4 @@
-{ lib, config, pkgs, input, ... }:
+{ config, lib, pkgs, ... }:
 
 let
     folder = ./.;
@@ -6,7 +6,7 @@ let
     filterConfig = key: value: value == "regular" && lib.hasSuffix ".nix" key && key != "default.nix";
     imports = lib.mapAttrsToList toImport (lib.filterAttrs filterConfig (builtins.readDir folder));
 in {
-    inherit imports;
+    home.stateVersion = "22.11";
 
     home = {
         username = "phil";
@@ -15,8 +15,6 @@ in {
 
     programs.home-manager.enable = true;
 
-    home.stateVersion = "22.11";
-
     home.packages = with pkgs; [
         # Command Line Tools
         neovim
@@ -24,8 +22,10 @@ in {
         exa ripgrep bat fd zoxide
         du-dust bottom btop ranger
         git doas curl wget clash
+	home-manager
 
         # Development Tools
+	direnv pacman
             # rustup llvm qemu_full
             # python3
 
@@ -40,6 +40,9 @@ in {
         brightnessctl pamixer
         hyprland wayfire
         waybar cava # swww
+	dconf
             # virt-manager
     ];
+
+    inherit imports;
 }

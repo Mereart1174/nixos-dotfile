@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ config, lib, ... }:
 
 let
     cfg = config.modules.waybar;
@@ -15,7 +15,8 @@ in {
                     position = "top";
                     modules-left = [
                         "custom/launcher"
-                        "custom/updates"
+                        # "custom/updates"
+			"custom/power"
                         "cpu"
                         "memory"
                         "tray"
@@ -96,14 +97,14 @@ in {
                     };
                     backlight = {
                         format = " {}%";
-                        on-scroll-up = "brightnessctl set +1%";
-                        on-scroll-down = "brightnessctl set 1%-";
+                        on-scroll-up = "brightnessctl set +2%";
+                        on-scroll-down = "brightnessctl set 2%-";
                     };
                     pulseaudio = {
                         on-click = "pamixer -t";
                         on-scroll-up =  "pamixer -i 1";
                         on-scroll-down =  "pamixer -d 1";
-                        scroll-step = 1;
+                        scroll-step = 2;
                         format = "{icon} {volume}%";
                         format-muted = "🔇";
                         format-icons = { default = ["" "" ""]; };
@@ -120,7 +121,7 @@ in {
                             warning = 30;
                             critical = 20;
                         };
-                        format = "{icon}    {capacity}%";
+                        format = "{icon} {capacity}%";
                         format-charging = "🕯️ {capacity}%";
                         format-plugged = "🕯️ {capacity}%";
                         format-alt = "{time} {icon}";
@@ -128,7 +129,7 @@ in {
                     };
                     "custom/power" = {
                         tooltip = false;
-                        format = " ";
+                        format = "  ";
                         on-click = "wlogout &";
                     };
                 };

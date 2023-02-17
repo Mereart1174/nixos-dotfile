@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ config, lib, ... }:
 
 let
     cfg = config.modules.alacritty;
@@ -26,7 +26,7 @@ in {
                         family = "LXGW WenKai Mono";
                         style = "Bold Italic";
                     };
-                    size = 28.0;
+                    size = 25.0;
                 };
                 window = {
                     decorations = "none";

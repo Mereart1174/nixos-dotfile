@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ config, lib, ... }:
 
 let
     cfg = config.modules.zsh;
@@ -16,8 +16,8 @@ in {
                 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
             '';
             sessionVariables = {
-                EDITOR="nvim --noplugin";
-                PAGER="less";
+                # EDITOR = "nvim --noplugin";
+                PAGER = "less";
                 TERMINAL = "alacritty";
                 BROWSER = "firefox";
                 BAT_THEME = "Dracula";
@@ -29,7 +29,7 @@ in {
             initExtra = ''
                 eval "$(starship init zsh)"
                 eval "$(zoxide init zsh)"
-                eval "$(direnv hook zsh)"
+                # eval "$(direnv hook zsh)"
 
                 setopt hist_save_no_dups
                 setopt hist_ignore_dups
@@ -88,20 +88,25 @@ in {
                 lsss = "exa --icons --group-directories-first --tree";
                 hg = "history 1 | grep";
 
-                # sz = "home-manager switch --flake $NIX_CONFIG_DIR";
-                sz = "doas nixos-rebuild switch --flake $NIX_CONFIG_DIR#magicbook";
+                # syu = "home-manager switch --flake $NIX_CONFIG_DIR";
+                syu = "doas nixos-rebuild switch --flake $NIX_CONFIG_DIR#nixos";
+		sz = "source ~/.zshrc";
                 nz = "nvim $NIX_CONFIG_DIR/user/config/zsh.nix";
-                np = "nvim $NIX_CONFIG_DIR/user/Philomatics.nix";
+                na = "nvim $NIX_CONFIG_DIR/user/config/alacritty.nix";
+                nw = "nvim $NIX_CONFIG_DIR/user/config/wayfire.nix";
+                np = "nvim $NIX_CONFIG_DIR/user/config/default.nix";
                 nh = "nvim $NIX_CONFIG_DIR/user/extraConfig/hyprland.conf";
                 nl = "neofetch";
                 cn = "cd $NIX_CONFIG_DIR";
-                nf = "nvim $NIX_CONFIG_DIR/flake.nix";
+                nf = "nvim flake.nix";
                 tq = "curl wttr.in";
                 fy = "trans :zh-CN";
                 pi = "curl cip.cc";
 
                 fq = "export http_proxy=127.0.0.1:7890; export https_proxy=127.0.0.1:7890";
-                spnn = "nix search nixpkgs";
+                spnn = "doas nix search nixpkgs";
+		spq = "ls /nix/store | rg";
+		cmd = "pacman -F";
                 sc = "sudo systemctl";
                 ce = "nvim ~/Mygits/Learning/CE/common.md";
             };

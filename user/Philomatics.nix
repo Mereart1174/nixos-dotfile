@@ -1,14 +1,13 @@
-{ config, input, ... }:
+{ config, ... }:
 
 {
     imports = [
         ./config/default.nix
-        input.hyprland.homeManagerModules.default
     ];
 
     config.modules = {
         alacritty.enable = true;
-        btop.enable = true;
+        # btop.enable = true;
         cave.enable = true;
         dunst.enable = true;
         # firefox.enable = true;

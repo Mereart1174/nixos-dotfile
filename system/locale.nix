@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
     time.timeZone = "Asia/Shanghai";
@@ -30,7 +30,7 @@
                 serif = [ "Noto Serif" "Noto Color Emoji" ];
                 sansSerif = [ "Noto Sans" "Noto Color Emoji" ];
                 monospace = [ "LXGW WenKai" ];
-                emoji = [ "Noto Color Emoji" ];
+                # emoji = [ "Noto Color Emoji" ];
             };
         };
     };
