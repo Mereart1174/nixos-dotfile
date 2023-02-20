@@ -16,7 +16,7 @@ in {
                 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
             '';
             sessionVariables = {
-                # EDITOR = "nvim --noplugin";
+                EDITOR = "nvim --noplugin";
                 PAGER = "less";
                 TERMINAL = "alacritty";
                 BROWSER = "firefox";
@@ -93,10 +93,12 @@ in {
 		sz = "source ~/.zshrc";
                 nz = "nvim $NIX_CONFIG_DIR/user/config/zsh.nix";
                 na = "nvim $NIX_CONFIG_DIR/user/config/alacritty.nix";
-                nw = "nvim $NIX_CONFIG_DIR/user/config/wayfire.nix";
+                nw = "nvim $NIX_CONFIG_DIR/user/extraConfig/wayfire.ini";
                 np = "nvim $NIX_CONFIG_DIR/user/config/default.nix";
-                nh = "nvim $NIX_CONFIG_DIR/user/extraConfig/hyprland.conf";
+                # nh = "nvim $NIX_CONFIG_DIR/user/extraConfig/hyprland.conf";
                 nl = "neofetch";
+		ng = "nvim gg";
+		ngg = "nvim ~/gg";
                 cn = "cd $NIX_CONFIG_DIR";
                 nf = "nvim flake.nix";
                 tq = "curl wttr.in";
@@ -109,6 +111,7 @@ in {
 		cmd = "pacman -F";
                 sc = "sudo systemctl";
                 ce = "nvim ~/Mygits/Learning/CE/common.md";
+		arch = "doas mount /dev/nvme0n1p6 /mnt";
             };
         };
     };

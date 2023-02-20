@@ -16,7 +16,7 @@ in {
                     modules-left = [
                         "custom/launcher"
                         # "custom/updates"
-			"custom/power"
+			# "custom/power"
                         "cpu"
                         "memory"
                         "tray"
@@ -31,7 +31,7 @@ in {
                         "battery"
                     ];
                     "custom/launcher" = {
-                        format = " ";
+                        format = " ";
                         on-click = "rofi -show drun";
                         on-click-right = "killall rofi";
                     };

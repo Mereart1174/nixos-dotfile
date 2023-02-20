@@ -29,9 +29,8 @@
                 system = "x86_64-linux";
                 modules = [
                     ./system/default.nix
-                    ./system/magicbook.nix
+                    ./system/hardware/magicbook.nix
 
-                    input.hyprland.nixosModules.default
                     input.nur.nixosModules.nur
 
                     home-manager.nixosModules.home-manager
@@ -39,6 +38,7 @@
                         home-manager = {
                             useUserPackages = true;
                             useGlobalPkgs = true;
+			    extraSpecialArgs = { inherit input; };
                             users.phil = (./. + "/user/Philomatics.nix");
                         };
                     }

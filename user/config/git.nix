@@ -8,7 +8,7 @@ in {
     config = lib.mkIf cfg.enable {
         programs.git = {
             enable = true;
-            userName = "Mereart";
+            userName = "Mereart1174";
             userEmail = "mereart1174@163.com";
             extraConfig = {
                 init = { defaultBranch = "main"; };

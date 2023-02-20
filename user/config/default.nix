@@ -22,10 +22,10 @@ in {
         exa ripgrep bat fd zoxide
         du-dust bottom btop ranger
         git doas curl wget clash
-	home-manager
+	home-manager proxychains
 
         # Development Tools
-	direnv pacman
+	direnv
             # rustup llvm qemu_full
             # python3
 
@@ -34,12 +34,12 @@ in {
         easyeffects
         firefox-wayland
         mpv mpvpaper imv
-        rofi dunst
+        dunst
         swaylock-effects wlogout
         wl-clipboard wlsunset
         brightnessctl pamixer
-        hyprland wayfire
-        waybar cava # swww
+        wayfire
+        rofi waybar cava # swww
 	dconf
             # virt-manager
     ];

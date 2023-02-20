@@ -26,8 +26,9 @@
         nvidia = {
             open = true;
             powerManagement.enable = true;
-            modesetting.enable = true;
+	    package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
         };
+	cpu.intel.updateMicrocode = true;
         opengl = {
             enable = true;
             extraPackages = with pkgs; [
@@ -55,22 +56,26 @@
         supportedFilesystems = [ "ntfs" ];
         cleanTmpDir = true;
         kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+        # kernelPackages = pkgs.linuxPackages_latest;
         loader = {
-            systemd-boot.enable = false;
-            efi.efiSysMountPoint = "/boot/efi";
-            timeout = 5;
+            efi = {
+	    	efiSysMountPoint = "/boot/efi";
+		canTouchEfiVariables = true;
+	    };
+            timeout = 0;
             grub = {
                 enable = true;
-                useOSProber = true;
+	        default = 0;
                 efiSupport = true;
                 device = "nodev";
                 theme = ../user/extraConfig/CyberEXS;
-                extraEntries = ''
-                    menuentry "Windows 11" {
-                        search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
-                        chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
-                    }
-                '';
+                ## useOSProber = true;
+                # extraEntries = ''
+                #     menuentry "Windows 11" {
+                #         search --file --no-floppy --set=root /EFI/Microsoft/Boot/bootmgfw.efi
+                #         chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
+                #     }
+                # '';
             };
         };
     };
@@ -81,6 +86,10 @@
     };
 
     services = {
+    	xserver = {
+	    # enable = true; ++ lightdm
+	    # videoDrivers = [ "nvidiaLegacy470" ];
+	};
         openssh = {
             enable = true;
         };
@@ -97,12 +106,11 @@
         };
         greetd = {
             enable = true;
-            settings = rec {
-                initial_session = {
-                    command = "Hyprland";
-                    user = "phil";
-                };
-                default_session = initial_session;
+            settings = {
+                default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd ${pkgs.writeShellScript "Hyprland-greetd" ''
+		    export $(/run/current-system/systemd/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
+		    exec Hyprland
+		''}";
             };
         };
     };
@@ -129,13 +137,9 @@
     };
 
     nixpkgs.config.allowUnfree = true;
+    programs.dconf.enable = true;
 
     environment = {
-        etc."greetd/environments" = {
-            text = ''
-                Hyprland
-            '';
-        };
         variables = {
             GTK_IM_MODULE = "fcitx";
             QT_IM_MODULE = "fcitx";
@@ -150,15 +154,13 @@
             CLUTTER_BACKEND = "wayland";
             SDL_VIDEODRIVER = "wayland";
 
-            XDG_CURRENT_DESKTOP = "Hyprland";
-            XDG_SESSION_DESKTOP = "Hyprland";
             XDG_CACHE_HOME = "\${HOME}/.cache";
             XDG_CONFIG_HOME = "\${HOME}/.config";
             XDG_BIN_HOME = "\${HOME}/.local/bin";
             XDG_DATA_HOME = "\${HOME}/.local/share";
         };
         systemPackages = with pkgs; [
-            linuxKernel.packages.linux_zen.nvidia_x11_legacy470
+	    # linux_zen.nvidia_x11_legacy470;
             wireplumber
             wayland
             wayland-utils
