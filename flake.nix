@@ -38,7 +38,7 @@
                         home-manager = {
                             useUserPackages = true;
                             useGlobalPkgs = true;
-			    extraSpecialArgs = { inherit input; };
+                            extraSpecialArgs = { inherit input; };
                             users.phil = (./. + "/user/Philomatics.nix");
                         };
                     }

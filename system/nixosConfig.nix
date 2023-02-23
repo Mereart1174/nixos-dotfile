@@ -172,6 +172,7 @@
             linux-firmware
             ntfs3g
             acpi
+	    pciutils
         ];
     };
 
