@@ -9,19 +9,23 @@
     settings = {
       font = {
         normal = {
-          family = "LXGW WenKai Mono";
+          # family = "LXGW WenKai Mono";
+          family = "Maple Mono NF CN";
           style = "Regular";
         };
         bold = {
-          family = "LXGW WenKai Mono";
+          # family = "LXGW WenKai Mono";
+          family = "Maple Mono NF CN";
           style = "Bold";
         };
         italic = {
-          family = "LXGW WenKai Mono";
+          # family = "LXGW WenKai Mono";
+          family = "Maple Mono NF CN";
           style = "Italic";
         };
         bold_italic = {
-          family = "LXGW WenKai Mono";
+          # family = "LXGW WenKai Mono";
+          family = "Maple Mono NF CN";
           style = "Bold Italic";
         };
         size = 25.0;
