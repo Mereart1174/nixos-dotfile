@@ -1,0 +1,131 @@
+// Based: https://github.com/theCode-Breaker/riverwm/blob/main/waybar/river/config-river
+{
+    "layer": "top",
+    "position": "top",
+    // "mod": "dock",
+    // "exclusive": true,
+    // "passtrough": false,
+    // "gtk-layer-shell": true,
+    // "height": 0,
+    "modules-left": [
+        "custom/launcher",
+        "custom/updates",
+        "cpu",
+        "memory",
+        "tray"
+    ],
+    // "modules-center": ["wlr/workspaces"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": [
+        "network",
+        "backlight",
+        // "custom/power",
+        "pulseaudio",
+        "bluetooth",
+        "clock",
+        "battery"
+    ],
+
+    "custom/launcher":{
+        "format": "  ",
+        "on-click": "rofi -show drun",
+        "on-click-right": "killall rofi"
+    },
+    "custom/updates": {
+        "exec": "(pacman -Qu) | wc -l",
+        "interval": 3600,
+        "format": "📥︎ {}",
+        "on-click": "alacritty -e doas pacman -Syu && notify-send '更新结束'"
+    },
+    "cpu": {
+        "interval": 3,
+        "format": " {}%",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 3,
+        "format": " {}%",
+        "max-length": 10
+    },
+    "tray":{
+        "icon-size": 18,
+        "spacing": 10
+    },
+
+    "wlr/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "{icon}",
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+        },
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "focused": " ",
+            "urgent": " ",
+            "default": " ",
+        },
+        "icon-size": 14
+    },
+
+    "network": {
+        "interval": 3,
+        "format-wifi": "⥣ {bandwidthUpBits} ⥥ {bandwidthDownBits}",
+        "format-disconnected": "",
+        "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz",
+    },
+    "backlight": {
+        "format": " {}%",
+        "on-scroll-up": "brightnessctl set +1%",
+        "on-scroll-down": "brightnessctl set 1%-",
+    },
+    "pulseaudio": {
+        "on-click": "pamixer -t",
+        "on-scroll-up": "pamixer -i 1",
+        "on-scroll-down": "pamixer -d 1",
+        "scroll-step": 1,
+        "format": "{icon} {volume}%",
+        "format-muted": "🔇",
+        "format-icons": {
+            "default": ["", "", ""]
+        }
+    },
+    "clock": {
+        "format": "{: %R   %m/%d}"
+    },
+    "bluetooth": {
+        // "format": " {status}",
+        "format": "",
+        "format-connected": " ",
+        "on-click": "blueberry"
+    },
+    "battery": {
+        "states": {
+            "good": 80,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "🕯️ {capacity}%",
+        // 🕯️⚡
+        "format-plugged": "🕯️ {capacity}%",
+        "format-alt": "{time} {icon}",
+        // "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""]
+    },
+    "custom/power":{
+        "format": " ",
+        "on-click": "wlogout",
+    },
+}
