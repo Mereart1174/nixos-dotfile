@@ -32,7 +32,7 @@
     };
 
   fileSystems."/home/philo/nas" =
-    { device = "/dev/disk/by-uuid/701d0281-7b93-4e2a-82c1-21d6c3967597";
+    { device = "/dev/disk/by-uuid/52d6e506-d23f-49d6-be0a-159506e54979";
       fsType = "btrfs";
       options = [ "compress=zstd" ];
     };
