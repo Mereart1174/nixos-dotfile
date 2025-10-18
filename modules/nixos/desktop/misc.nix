@@ -26,6 +26,10 @@
     wl-clipboard
   ];
 
+  nixpkgs.config.packageOverrides = pkgs: {
+    transmission = pkgs.unstable.transmission_4; # 使用 Transmission 4
+  };
+
   services = {
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
