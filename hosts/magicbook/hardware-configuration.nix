@@ -31,6 +31,12 @@
       options = [ "subvol=home" "compress=zstd" ];
     };
 
+  fileSystems."/home/philo/nas" =
+    { device = "/dev/disk/by-uuid/701d0281-7b93-4e2a-82c1-21d6c3967597";
+      fsType = "btrfs";
+      options = [ "compress=zstd" ];
+    };
+
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/b749d995-054a-4e39-be39-93aeb4f38c6a";
       fsType = "btrfs";
