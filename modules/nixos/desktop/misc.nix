@@ -33,6 +33,22 @@
     transmission = {
       package = pkgs.transmission_4;
       enable = true;
+      # openFirewall = true;
+      downloadDirPermissions = "0770";
+      settings = {
+        download-dir = "/home/philo/Downloads";
+	incomplete-dir-enabled = true;
+	incomplete-dir = "/home/philo/Downloads/incomplete";
+	rpc-enabled = true;
+	rpc-bind-address = "127.0.0.1";
+	rpc-prot = 9091;
+	rpc-whitelist-enable = false;
+	rpc-authentication-required = true;
+	lpd-enabled = true;
+	peer-port = 51413;
+	port-forwoarding-enabled = true;
+	umask = 2;
+      };
     };
   };
 
