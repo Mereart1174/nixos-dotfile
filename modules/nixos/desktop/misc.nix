@@ -33,6 +33,7 @@
     transmission = {
       package = pkgs.transmission_4;
       enable = true;
+      user = "philo";
       # openFirewall = true;
       downloadDirPermissions = "0770";
       settings = {
@@ -47,7 +48,6 @@
 	lpd-enabled = true;
 	peer-port = 51413;
 	port-forwoarding-enabled = true;
-	umask = 2;
       };
     };
   };
