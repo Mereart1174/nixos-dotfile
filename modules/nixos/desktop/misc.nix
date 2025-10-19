@@ -33,7 +33,7 @@
     transmission = {
       package = pkgs.transmission_4;
       enable = true;
-      user = "philo";
+      # user = "philo";
       # openFirewall = true;
       downloadDirPermissions = "0770";
       settings = {
@@ -43,7 +43,7 @@
 	rpc-enabled = true;
 	rpc-bind-address = "127.0.0.1";
 	rpc-prot = 9091;
-	rpc-whitelist-enable = false;
+	rpc-whitelist-enable = true;
 	rpc-authentication-required = true;
 	lpd-enabled = true;
 	peer-port = 51413;
