@@ -43,9 +43,11 @@
 	rpc-enabled = true;
 	rpc-bind-address = "127.0.0.1";
 	rpc-prot = 9091;
-	rpc-whitelist-enable = true;
-	rpc-authentication-required = true;
+	rpc-whitelist-enable = false;
+	rpc-authentication-required = false;
 	lpd-enabled = true;
+	dht-enabled = true;
+	pex-enabled = true;
 	peer-port = 51413;
 	port-forwoarding-enabled = true;
       };
