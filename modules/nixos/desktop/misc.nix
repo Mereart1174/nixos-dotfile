@@ -52,6 +52,16 @@
 	port-forwoarding-enabled = true;
       };
     };
+    aria2 = {
+      enable = true;
+      downloadDirPermission = "0770";
+      rpcSecretFile = "/home/philo/.config/aria2/aria2.secret";
+      settings = {
+        dir = "/home/philo/Downloads";
+	# enable-rpc = true;
+	conf-path = "/home/philo/.config/aria2/aria2.conf";
+      };
+    };
   };
 
   programs = {
