@@ -54,12 +54,12 @@
     };
     aria2 = {
       enable = true;
-      downloadDirPermission = "0770";
+      downloadDirPermission = "0777";
+      serviceUMask = "0002";
       rpcSecretFile = "/home/philo/.config/aria2/aria2.secret";
       settings = {
         dir = "/home/philo/Downloads";
-	# enable-rpc = true;
-	conf-path = "/home/philo/.config/aria2/aria2.conf";
+	enable-rpc = true;
       };
     };
   };
