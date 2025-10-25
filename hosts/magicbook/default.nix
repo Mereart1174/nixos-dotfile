@@ -27,7 +27,8 @@ in
 
     # we use networkd instead
     networkmanager.enable = true; # provides nmcli/nmtui for wifi adjustment
-    useDHCP = false;
+    # useDHCP = false;
+    # firewall.enable = false;
   };
 
   # networking.useNetworkd = true;

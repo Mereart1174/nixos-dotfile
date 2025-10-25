@@ -34,6 +34,7 @@
     parted
 
     aria2
+    mihomo
   ];
 
   # BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more

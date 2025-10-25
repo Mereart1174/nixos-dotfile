@@ -15,6 +15,7 @@
       # device = "/dev/sda";
       efiSupport = true; # uefi
       useOSProber = true;
+      theme = "/home/philo/.config/grub/themes/CyberEXS"
     };
   };
 }

@@ -30,6 +30,12 @@
   services = {
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
+    # resolved.enable = true;
+    mihomo = {
+      enable = true;
+      tunMode = false;
+      configFile = "/home/philo/clash.yaml";
+    };
     transmission = {
       package = pkgs.transmission_4;
       enable = true;
@@ -46,21 +52,20 @@
 	rpc-whitelist-enable = false;
 	rpc-authentication-required = false;
 	lpd-enabled = true;
+	utp-enabled = true;
 	dht-enabled = true;
 	pex-enabled = true;
 	peer-port = 51413;
 	port-forwoarding-enabled = true;
       };
     };
-    aria2 = {
+    dae = {
       enable = true;
-      downloadDirPermission = "0777";
-      serviceUMask = "0002";
-      rpcSecretFile = "/home/philo/.config/aria2/aria2.secret";
-      settings = {
-        dir = "/home/philo/Downloads";
-	enable-rpc = true;
-      };
+      configFile = "/home/philo/clash-config.dae";
+      assets = with pkgs; [
+        v2ray-geoip
+    	v2ray-domain-list-community
+      ];
     };
   };
 
