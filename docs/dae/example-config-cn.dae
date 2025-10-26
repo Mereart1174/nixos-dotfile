@@ -1,0 +1,304 @@
+global {
+  ##### 软件选项。
+
+  # tproxy 监听端口。非 HTTP/SOCKS 端口，仅供 eBPF 程序使用。正常情况下，用户不需要使用它
+  tproxy_port: 12345
+
+  # 设置为 true 以保护 tproxy 端口免受未经请求的流量。
+  # 设置为 false 以允许用户使用自己的 iptables tproxy 规则。
+  tproxy_port_protect: true
+
+  # 设置非零值以启用 pprof。
+  pprof_port: 0
+
+  # 如果非零，从 dae 发送的流量将被设置为 SO_MARK。
+  so_mark_from_dae: 0
+
+  # 日志级别： error, warn, info, debug, trace。
+  log_level: info
+
+  # 禁用在拉取订阅之前等待网络。
+  disable_waiting_network: false
+
+  # 为本地 TCP 连接启用快速重定向。已知内核问题会导致某些客户端/代理（如 nadoo/glider）无法正常工作。用户自行承担启用此实验性选项的风险。
+  enable_local_tcp_fast_redirect: false
+
+  ##### 接口和内核选项。
+
+  # 要绑定的 LAN 接口。代理 LAN，多个接口用“，”分隔。
+  #lan_interface: docker0
+
+  # 要绑定的 WAN 接口。代理本地主机，多个接口用“，”分隔。使用“auto”进行自动检测。
+  wan_interface: auto
+
+  # 自动配置 Linux 内核参数，例如 ip_forward 和 send_redirects。
+  # 详情查看 https://github.com/daeuniverse/dae/blob/main/docs/en/user-guide/kernel-parameters.md
+  auto_config_kernel_parameter: true
+
+  ##### 节点连接检查。
+
+  # 这些选项作为默认值，当组中未给出定义时有效。
+  # 如果您本地有双栈，URL 的主机应该同时具有 IPv4 和 IPv6。
+  # 第一个是 URL，其他的是 IP 地址（如果给出）。
+  # 考虑到流量消耗，建议选择 anycast IP 和响应较少的站点。
+  # tcp_check_url: 'http://cp.cloudflare.com'
+  tcp_check_url: 'http://cp.cloudflare.com,1.1.1.1,2606:4700:4700::1111'
+
+  # 向 `tcp_check_url` 的 HTTP 请求方法。默认使用 'HEAD'，因为某些服务器实现会绕过此类流量的核算。
+  tcp_check_http_method: HEAD
+
+  # 此 DNS 将用于检查节点的 UDP 连接性。如果下面的 dns_upstream 包含 tcp，则它也将用于检查节点的 TCP DNS 连接性。
+  # 第一个是 URL，其他的是 IP 地址（如果给出）。
+  # 如果您本地有双栈，此 DNS 应该同时具有 IPv4 和 IPv6。
+  #udp_check_dns: 'dns.google:53'
+  udp_check_dns: 'dns.google:53,8.8.8.8,2001:4860:4860::8888'
+
+  check_interval: 30s
+
+  # 仅当 new_latency <= old_latency - tolerance 时，组才会切换节点。
+  check_tolerance: 50ms
+
+  ##### 连接选项。
+
+  # dial_mode 的可选值为：
+  # 1. “ip”：直接使用 DNS 中的 IP 地址进行拨号代理。
+  # 这允许您的 ipv4 和 ipv6 分别选择最佳路径，并使应用程序请求的 IP 版本符合预期。
+  # 例如，如果您使用 curl -4 ip.sb，您将通过代理请求 IPv4 并获得 IPv4 响应。使用 curl -6 ip.sb 将请求 IPv6。
+  # 如果您的节点支持此功能，这可能会解决一些奇怪的 full-cone 问题。
+  # 在此模式下，Sniffinf 将被禁用。
+  # 2. "domain"：使用嗅探获取的域名进行拨号代理。
+  # 如果 DNS 环境不纯净，这将在很大程度上缓解 DNS 污染问题。
+  # 通常，此模式可以带来更快的代理响应时间，因为代理会在远程重新解析域名，从而获得更好的 IP 地址结果以进行连接。
+  # 此策略不影响路由，也就是说，domain 重写将在路由流量拆分后进行，Dae 不会对其进行重新路由。
+  # 3. "domain+"：基于 domain 模式，但不检查嗅探域名的真实性。
+  # 这对于 DNS 请求不经过 dae 但希望代理响应速度更快的用户非常有用。
+  # 请注意，如果 DNS 请求不经过 dae，dae 就无法通过 domain 拆分流量。
+  # 4. “domain++"：基于 “domain+” 模式，但强制使用嗅探到的 domain 重新路由流量，以部分恢复基于 domain 的流量拆分能力。
+  #  它对直接流量无效，并且会消耗更多 CPU 资源。
+  dial_mode: domain
+
+  # 允许不安全的 TLS 证书。除非必要，否则不建议启用此功能。
+  allow_insecure: false
+
+  # 等待首次数据发送的超时时间。如果拨号模式是 ip，则该值始终为 0。将其设置得更高一些在高延迟 LAN 网络中会很有用。
+  sniffing_timeout: 100ms
+
+  # TLS 实现。tls 是使用 Go 的 crypto/tls。utls 是使用 uTLS，它可以模仿浏览器的 Client Hello。
+  tls_implementation: tls
+
+  # uTLS 模仿的客户端 Hello ID。仅当 tls_implementation 为 utls 时才有效。
+  # 更多内容请见：https://github.com/daeuniverse/dae/blob/331fa23c16/component/outbound/transport/tls/utls.go#L17
+  utls_imitate: chrome_auto
+
+  # TLS 分片支持。如果启用，dae 将以分片形式发送 Client Hello，以绕过 SNI 阻塞。
+  tls_fragment: false
+
+  # TLS 分片数据包长度范围，以字节为单位。每个分片的长度都是从该范围中随机生成的。
+  tls_fragment_length: '50-100'
+
+  # TLS 分片数据包长度，以毫秒为单位。每个分片间隔都是从此范围中随机生成的。
+  tls_fragment_interval: '10-20'
+
+  # 多路径 TCP (MPTCP) 支持。如果设置为 true，dae 将尝试使用 MPTCP 连接所有节点，但仅当节点支持 MPTCP 时才会生效。
+  # 它可用于负载均衡以及故障转移到多个接口和 IP 地址。
+  mptcp: false
+
+  # 访问互联网的最大带宽。它对某些特定协议（例如 Hysteria2）很有用，提供带宽信息后性能会更好。
+  # 单位可以是 b、kb、mb、gb、tb 或字节/秒。。
+  # 支持的格式：https://v2.hysteria.network/docs/advanced/Full-Client-Config/#bandwidth
+  bandwidth_max_tx: '200 mbps' # uplink, or '200 m' or '200 mb' or '200 mbps' or 25000000(which is 200/8*1000*1000)
+  bandwidth_max_rx: '1 gbps' # downlink, or '1 g' or '1 gb' or '1 gbps' or 125000000(which is 1000/8*1000*1000)
+
+  # dae 使用系统 DNS 解析 DoH/DoT 域名和订阅链接。
+  # 然而，系统 DNS 可能不可靠或出现故障，因此我们指定了一个备用 DNS 解析器，用于在使用 resolv.conf 进行 DNS 解析失败时使用。
+  # 这确保即使系统默认 DNS 服务器不可用或无法正常响应，DNS 解析也能继续工作。
+  # 默认值为 Google 的 DNS（8.8.8.8:53）。对于 IPv4 DNS 服务器，格式为“ipv4:port”，例如“8.8.8.8:53”。
+  # 对于 IPv6 DNS 服务器，格式为“[ipv6]:port”，例如“[2001:4860:4860::8888]:53”。
+  # 即使您未在配置文件中指定它，后备解析器也将始终可用。
+  # fallback_resolver: '8.8.8.8:53'
+}
+
+# 此处定义的订阅将被解析为节点并合并为全局节点池的一部分。
+# 支持为订阅添加标签，并在组部分中过滤来自给定订阅的节点。
+subscription {
+  # 在此处添加您的订阅链接。
+  my_sub: 'https://www.example.com/subscription/link'
+  another_sub: 'https://example.com/another_sub'
+  'https://example.com/no_tag_link'
+  'file://relative/path/to/mysub.sub' # Put subscription content in /etc/dae/relative/path/to/mysub.sub
+  'file://relative/path/to/mysub.sub' # 将订阅内容放入/etc/dae/relative/path/to/mysub.sub
+
+  # 带有“-file”的订阅将保存到“config_dir/persist.d/your_sub_tag.sub”。
+  # 当通过链接获取订阅失败时，此文件将作为后备。
+  # 一旦获取成功，它将自动更新。
+  persist_sub: 'https-file://www.example.com/persist_sub/link'
+}
+
+# 此处定义的节点将合并为全局节点池的一部分。
+node {
+  # 在此处添加您的节点链接。
+  # 支持 socks5、http、https、ss、ssr、vmess、vless、trojan、tuic、juicity、hysteria2 等。
+  # 完整支持列表：https://github.com/daeuniverse/dae/blob/main/docs/en/proxy-protocols.md
+  'socks5://localhost:1080'
+  mylink: 'ss://LINK'
+  node1: 'vmess://LINK'
+  node2: 'vless://LINK'
+  chains: 'tuic://LINK -> vmess://LINK'
+  hysteria2: 'hysteria2://password@server-ip:port/?sni=domain'
+}
+
+# 请参阅 https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/dns.md 了解完整示例。
+dns {
+  # 例如，如果 ipversion_prefer 为 4，并且域名同时具有 A 类型和 AAAA 类型记录，则 dae 将仅响应 A 类型查询，而对 AAAA 类型查询响应空答案。
+  #ipversion_prefer: 4
+
+  # 为域名指定一个固定的 TTL。零表示 dae 每次都会向上游请求，并且不会缓存这些域名的 DNS 结果。
+  #fixed_domain_ttl {
+    # ddns.example.org: 10
+    #ddns.example.org: 10
+    # test.example.org: 3600
+  #}
+
+  # 绑定到本地地址来监听 DNS 查询
+  # bind: '127.0.0.1:5353'
+  # bind: 'tcp://127.0.0.1:5353'
+  # bind: 'udp://127.0.0.1:5353'
+  # bind: 'tcp+udp://127.0.0.1:5353'
+
+  upstream {
+    # 值可以是 scheme://host:port，其中 scheme 可以是 tcp/udp/tcp+udp/h3/http3/quic/https/tls。
+    # 如果协议为 h3/http3/https，则支持设置自定义路径，即格式可以为“protocol://host:port/自定义路径”。
+    # 如果主机是一个域并且同时具有 IPv4 和 IPv6 记录，dae 将根据组策略（例如最小延迟策略）自动选择使用 IPv4 或 IPv6。
+    # 请确保 DNS 流量将通过 dae 并由其转发，这是域路由所必需的。
+    # 如果 dial_mode 为 “ip”，则上游 DNS 答案不应受到污染，因此不建议使用国内公共 DNS。
+
+    alidns: 'udp://dns.alidns.com:53'
+    googledns: 'tcp+udp://dns.google:53'
+
+    # alih3: 'h3://dns.alidns.com:443'
+    # alih3_path: 'h3://dns.alidns.com:443/dns-query'
+    # alihttp3: 'http3://dns.alidns.com:443'
+    # alihttp3_path: 'http3://dns.alidns.com:443/dns-query'
+    # ali_quic: 'quic://dns.alidns.com:853'
+
+    # h3_custom_path: 'h3://dns.example.com:443/custom-path'
+    # http3_custom_path: 'http3://dns.example.com:443/custom-path'
+
+    # ali_doh: 'https://dns.alidns.com:443'
+    # ali_dot: 'tls://dns.alidns.com:853'
+    # doh_custom_path: 'https://dns.example.com:443/custom-path'
+  }
+
+  routing {
+    # 根据 dns 查询的请求，决定使用哪个 DNS 上游。
+    # 从上到下匹配规则。
+    request {
+      # Lookup China mainland domains using alidns, otherwise googledns.
+      # 使用 alidns 查找中国大陆域名，否则使用 googledns。
+      qname(geosite:cn) -> alidns
+      # fallback 也称为 default。
+      fallback: googledns
+    }
+}
+
+  # routing {
+    # # 根据 dns 查询的请求，决定使用哪个 DNS 上游。
+    # # 从上到下匹配规则。
+    # request {
+      # # fallback 也称为 default。
+      # fallback: alidns
+    # }
+    # # 根据 dns 查询的响应，决定接受或使用另一个 DNS 上游重新查找。
+    # # 从上到下匹配规则。
+    # response {
+      # # 值得信赖的上游upstream。始终接受其 result。
+      # upstream(googledns) -> accept
+      # # 可能被污染了，使用 googledns 重新查找。
+      # ip(geoip:private) && !qname(geosite:cn) -> googledns
+      # fallback: accept
+    # }
+  # }
+}
+
+
+# Node group (outbound).
+# 节点组（出站outbound）
+group {
+  my_group {
+    ## 无过滤器。使用所有节点。
+
+    # 为每个连接从组中随机选择一个节点。
+    #policy: random
+
+    # 为每个连接从组中选择第一个节点。
+    #policy: fixed(0)
+
+    # 为每个连接从组中选择具有最小最后延迟的节点。
+    #policy: min
+
+    # 为每个连接从组中选择具有最小移动平均延迟的节点。
+    policy: min_moving_avg
+  }
+
+  group2 {
+    # 从上面的订阅和节点部分定义的全局节点池中过滤节点。
+    #filter: subtag(my_sub) && !name(keyword: 'ExpireAt:')
+    # 多个过滤器表示“或”逻辑。
+    #filter: subtag(regex: '^my_', another_sub) && !name(keyword: 'ExpireAt:')
+
+    # 从标签定义的全局节点池中筛选节点。
+    #filter: name(node1, node2)
+
+    # 过滤节点并给出固定的延迟偏移，以实现基于延迟的故障转移。
+    # 在这个例子中，即使 US 节点的原始延迟较高，也有可能选择 US 节点。
+    filter: name(HK_node)
+    filter: name(US_node) [add_latency: -500ms]
+
+    # 对于每个连接，从组中选择最近 10 次延迟平均值最小的节点。
+    policy: min_avg10
+  }
+
+  steam {
+    # 从上面的订阅和节点部分定义的全局节点池中过滤节点。
+    filter: subtag(my_sub) && !name(keyword: 'ExpireAt:')
+    # 为每个连接从组中选择具有最小移动平均延迟的节点。
+    policy: min_moving_avg
+
+    # 覆盖全局中的 tcp_check_url。
+    tcp_check_url: 'http://test.steampowered.com'
+
+    # 覆盖全局的 tcp_check_http_method
+    #tcp_check_http_method: HEAD
+    # 覆盖全局的 udp_check_dns
+    #udp_check_dns: 'dns.google:53,8.8.8.8,2001:4860:4860::8888'
+    # 覆盖全局的 check_interval
+    #check_interval: 30s
+    # 覆盖全局的 check_tolerance
+    #check_tolerance: 50ms
+  }
+}
+
+# 请参阅 https://github.com/daeuniverse/dae/blob/main/docs/en/configuration/routing.md 了解完整示例。
+routing {
+  ### 预设规则。
+
+  # 本地主机中的网络管理器应直接连接，以避免绑定到 WAN 时的网络连接检查误报。
+  pname(NetworkManager) -> direct
+
+  # 放在最前面，可以防止广播、组播等应该发送到 LAN 的数据包通过代理转发。
+  #“dip” 表示目标 IP。
+  dip(224.0.0.0/3, 'ff00::/8') -> direct
+
+  # 此行允许您直接访问私有地址，而不是通过代理。如果您确实想访问代理主机网络中的私有地址，请修改以下行。
+  dip(geoip:private) -> direct
+
+  ### 在下面写下你的规则。
+
+  # 禁用 h3，因为它通常会消耗过多的 CPU/内存资源。
+  l4proto(udp) && dport(443) -> block
+  dip(geoip:cn) -> direct
+  domain(geosite:cn) -> direct
+
+  fallback: my_group
+}
+
