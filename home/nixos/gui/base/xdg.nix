@@ -40,7 +40,6 @@
           ];
           editor = [
             "nvim.desktop"
-            "Helix.desktop"
             "code.desktop"
             "code-insiders.desktop"
           ];
