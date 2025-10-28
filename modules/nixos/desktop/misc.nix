@@ -24,6 +24,7 @@
   environment.systemPackages = with pkgs; [
     gnumake
     wl-clipboard
+    # rustdesk-flutter
   ];
 
 
@@ -31,6 +32,10 @@
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
     # resolved.enable = true;
+    #rustdesk-server = {
+    #  enable = true;
+    #  openFirewall = true;
+    #};
     mihomo = {
       enable = true;
       tunMode = false;

@@ -66,8 +66,7 @@
       spq = "ls /nix/store | rg";
       sc = "sudo systemctl";
       ce = "nvim ~/Mygits/Learning/CE/common.md";
-      acpi = "cat /sys/class/power_supply/BAT0/capacity";
-      charge = "cat /sys/class/power_supply/BAT0/status";
+      acpi = "cat /sys/class/power_supply/BAT1/capacity /sys/class/power_supply/BAT1/status";
     };
   };
 }

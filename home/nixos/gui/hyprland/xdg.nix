@@ -27,7 +27,7 @@
     # ls /etc/profiles/per-user/ryan/share/xdg-desktop-portal/portals
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk # for provides file picker / OpenURI
-      # xdg-desktop-portal-wlr
+      xdg-desktop-portal-wlr
       xdg-desktop-portal-hyprland # for Hyprland
     ];
   };
