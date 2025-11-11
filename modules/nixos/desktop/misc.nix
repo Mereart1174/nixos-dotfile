@@ -39,7 +39,7 @@
     mihomo = {
       enable = true;
       tunMode = false;
-      configFile = "/home/philo/clash.yaml";
+      configFile = "/home/philo/dog-clash.yaml";
     };
     transmission = {
       package = pkgs.transmission_4;
