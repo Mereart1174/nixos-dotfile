@@ -5,8 +5,7 @@
 #
 #############################################################
 let
-  hostName = "extra"; # Define your hostname.
-
+  hostName = "external";
 in
 {
   imports = [
