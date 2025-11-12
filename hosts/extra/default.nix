@@ -5,7 +5,7 @@
 #
 #############################################################
 let
-  hostName = "magicbook"; # Define your hostname.
+  hostName = "extra"; # Define your hostname.
 
 in
 {
@@ -13,7 +13,7 @@ in
     # ./netdev-mount.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./nvidia.nix
+    ./gpu.nix
     ./boot.nix
 
     ./preservation.nix

@@ -1,5 +1,5 @@
 # { lib, ... }:
-{ lib, pkgs, ... }:
+{ lib, pkgs, mylib, ... }:
 {
   # boot.loader.systemd-boot = {
     # we use Git for version control, so we don't need to keep too many generations.
@@ -15,7 +15,7 @@
       # device = "/dev/sda";
       efiSupport = true; # uefi
       useOSProber = true;
-      theme = "/home/philo/.config/grub/themes/CyberEXS";
+      theme = mylib.relativeToRoot "home/nixos/gui/base/desktop/config/CyberEXS";
     };
   };
 }

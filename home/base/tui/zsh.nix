@@ -6,6 +6,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     completionInit = ''
+      bindkey -e
       autoload -Uz compinit && compinit -u
       # 仅在输入全小写时忽略大小写（输入大写时严格匹配）
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
