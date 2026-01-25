@@ -15,7 +15,7 @@
       # device = "/dev/sda";
       efiSupport = true; # uefi
       useOSProber = true;
-      theme = mylib.relativeToRoot "home/nixos/gui/base/desktop/config/CyberEXS";
+      theme = mylib.relativeToRoot "home/desktop/base/desktop/config/CyberEXS";
     };
   };
 }

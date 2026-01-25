@@ -5,7 +5,7 @@
       enable = true;
       device = "nodev";
       efiSupport = true;
-      theme = mylib.relativeToRoot "home/nixos/gui/base/desktop/config/CyberEXS";
+      theme = mylib.relativeToRoot "home/desktop/base/desktop/config/CyberEXS";
     };
   };
 }
