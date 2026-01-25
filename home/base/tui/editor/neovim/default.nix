@@ -16,8 +16,6 @@ let
 in
 {
   xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink configPath;
-  # Disable catppuccin to avoid conflict with my non-nix config.
-  catppuccin.nvim.enable = false;
 
   programs.neovim = {
     enable = true;

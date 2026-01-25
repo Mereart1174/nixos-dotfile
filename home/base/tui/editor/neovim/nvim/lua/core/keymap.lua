@@ -1,4 +1,4 @@
-im.keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
+vim.keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 vim.keymap.set("n", "<leader>q", ":q<CR>", { silent = true })
 vim.keymap.set("n", "<leader>wq", ":wq<CR>", { silent = true })
 

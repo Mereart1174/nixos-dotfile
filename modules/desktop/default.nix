@@ -3,6 +3,7 @@
   config,
   lib,
   myvars,
+  mylib,
   ...
 }:
 with lib;
@@ -10,7 +11,8 @@ let
   cfgWayland = config.modules.desktop.wayland;
 in
 {
-  imports = [
+  imports = mylib.scanPaths ./.
+    ++ [
     ../base
   ];
 
