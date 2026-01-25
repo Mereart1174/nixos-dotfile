@@ -10,7 +10,7 @@ in
   xdg.configFile =
     let
       mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-      confPath = "${config.home.homeDirectory}/nixos-dotfile/home/nixos/gui/hyprland/conf";
+      confPath = "${config.home.homeDirectory}/nixos-dotfile/home/desktop/hyprland/conf";
     in
     {
       "hypr/configs".source = mkSymlink confPath;

@@ -40,7 +40,7 @@
   xdg.configFile =
     let
       mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-      confPath = "${config.home.homeDirectory}/nixos-dotfile/home/nixos/gui/base/desktop/config";
+      confPath = "${config.home.homeDirectory}/nixos-dotfile/home/desktop/base/desktop/config";
     in
     {
       # "mako".source = mkSymlink "${confPath}/mako";
