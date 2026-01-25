@@ -18,7 +18,7 @@ let
       (map mylib.relativeToRoot [
         # common
         # "secrets/nixos.nix"
-        "modules/nixos"
+        "modules/desktop"
         # host specific
         "hosts/${name}"
       ])
@@ -35,7 +35,7 @@ let
     home-modules =
       (map mylib.relativeToRoot [
         # common
-        "home/nixos/gui.nix"
+        "home/desktop.nix"
         # host specific
         "hosts/${name}/home.nix"
       ]);

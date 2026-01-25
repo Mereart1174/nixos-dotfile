@@ -30,11 +30,11 @@
       myvars.username
       "users"
       "wheel"
-      "networkmanager" # for nmtui / nm-connection-editor
+      "networkmanager"
       "podman"
       "wireshark"
-      "adbusers" # android debugging
-      "libvirtd" # virt-viewer / qemu
+      "adbusers"
+      "libvirtd"
     ];
   };
 

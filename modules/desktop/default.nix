@@ -11,10 +11,7 @@ let
 in
 {
   imports = [
-    ./base
     ../base
-
-    ./desktop
   ];
 
   options.modules.desktop = {
