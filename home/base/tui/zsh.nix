@@ -62,11 +62,9 @@
       np = "nvim $NIX_CONFIG_DIR/user/config/default.nix";
       # nh = "nvim $NIX_CONFIG_DIR/user/extraConfig/hyprland.conf";
       nl = "neofetch";
-      fq = "export http_proxy=127.0.0.1:7890; export https_proxy=127.0.0.1:7890";
       spnn = "doas nix search nixpkgs";
       spq = "ls /nix/store | rg";
       sc = "sudo systemctl";
-      ce = "nvim ~/Mygits/Learning/CE/common.md";
       acpi = "cat /sys/class/power_supply/BAT1/capacity /sys/class/power_supply/BAT1/status";
     };
   };
