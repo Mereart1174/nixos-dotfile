@@ -48,34 +48,4 @@
     "GDK_BACKEND" = "wayland";
     "XDG_SESSION_TYPE" = "wayland";
   };
-
-  xdg.configFile =
-    let
-      mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-      confPath = "${config.home.homeDirectory}/nixos-dotfile/home/desktop/base/config";
-    in
-    {
-      # "mako".source = mkSymlink "${confPath}/mako";
-      "waybar".source = mkSymlink "${confPath}/waybar";
-      "wlogout".source = mkSymlink "${confPath}/wlogout";
-      "hypr/hypridle.conf".source = mkSymlink "${confPath}/hypridle.conf";
-    };
-
-  # status bar
-  programs.waybar = {
-    enable = true;
-    systemd.enable = true;
-  };
-
-  # screen locker
-  # programs.swaylock.enable = true;
-
-  # Logout Menu
-  programs.wlogout.enable = true;
-
-  # Hyprland idle daemon
-  # services.hypridle.enable = true;
-  
-  # notification daemon, the same as dunst
-  services.mako.enable = true;
 }
