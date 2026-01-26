@@ -25,7 +25,8 @@
     home = "/home/${myvars.username}";
     isNormalUser = true;
     shell = pkgs.zsh;
-    initialPassword = "1234";
+    # initialPassword = "1234";
+    inherit (myvars) initialHashedPassword;
     extraGroups = [
       myvars.username
       "users"
@@ -39,8 +40,8 @@
   };
 
   users.users.root = {
+    inherit (myvars) initialHashedPassword;
     shell = pkgs.zsh;
-    initialPassword = "1234";
   };
 
   programs.zsh.enable = true;

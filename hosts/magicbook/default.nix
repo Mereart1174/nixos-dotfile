@@ -1,23 +1,15 @@
 { myvars, lib, ... }:
-#############################################################
-#
-#  Magicbook Pro 2019 - my first computer, with Arch + NixOS + Win11 + Deepined.
-#
-#############################################################
 let
-  hostName = "magicbook"; # Define your hostname.
+  hostName = "magicbook";
 
 in
 {
   imports = [
-    # ./netdev-mount.nix
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./nvidia.nix
     ./boot.nix
 
     ./preservation.nix
-    # ./secureboot.nix
   ];
 
   # services.sunshine.enable = lib.mkForce true;
@@ -28,10 +20,6 @@ in
     # useDHCP = false;
     # firewall.enable = false;
   };
-
-  # networking.useNetworkd = true;
-  # systemd.network.enable = true;
-
 
   system.stateVersion = "25.05";
 }

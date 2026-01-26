@@ -5,6 +5,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
     completionInit = ''
       bindkey -e
       autoload -Uz compinit && compinit -u

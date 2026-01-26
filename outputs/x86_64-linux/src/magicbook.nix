@@ -35,7 +35,7 @@ let
     home-modules =
       (map mylib.relativeToRoot [
         # common
-        "home/desktop.nix"
+        "home/desktop"
         # host specific
         "hosts/${name}/home.nix"
       ]);

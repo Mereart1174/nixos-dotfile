@@ -37,6 +37,18 @@ return {
         }
       }
     })
+    vim.lsp.config("nil", {
+      capabilities = capabilities,
+      settings = {
+        ["nil"] = {
+          formatting = { command = { "nixfmt" } },
+          nix = {
+            maxMemoryMB = 256,
+              flake = { autoArchive = true },
+          },
+        },
+      },
+    })
     local servers = {
       "clangd",
       "rust_analyzer",
@@ -44,7 +56,8 @@ return {
       "lua_ls",
       "ts_ls",
       "bashls",
-      "marksman"
+      "marksman",
+      "nil",
     }
     
     for _, server in ipairs(servers) do

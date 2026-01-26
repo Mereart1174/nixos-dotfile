@@ -1,13 +1,37 @@
+{ pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}:
-{
-  imports = [
-    ./anyrun.nix
-    ./nvidia.nix
+  home.packages = with pkgs; [
+    firefox
+    swaybg
+    wl-clipboard
+    hyprpicker
+    brightnessctl
+    hyprshot
+    wf-recorder
+    alsa-utils
+    networkmanagerapplet
   ];
+
+  programs = {
+    google-chrome = {
+      enable = true;
+      package = if pkgs.stdenv.isAarch64 then pkgs.chromium else pkgs.google-chrome;
+
+      # https://wiki.archlinux.org/title/Chromium#Native_Wayland_support
+      commandLineArgs = [
+        "--ozone-platform-hint=auto"
+        "--ozone-platform=wayland"
+        # make it use GTK_IM_MODULE if it runs with Gtk4, so fcitx5 can work with it.
+        # (only supported by chromium/chrome at this time, not electron)
+        "--gtk-version=4"
+        # make it use text-input-v1, which works for kwin 5.27 and weston
+        "--enable-wayland-ime"
+
+        # enable hardware acceleration - vulkan api
+        # "--enable-features=Vulkan"
+      ];
+    };
+  };
 
   # wayland related
   home.sessionVariables = {
@@ -25,27 +49,15 @@
     "XDG_SESSION_TYPE" = "wayland";
   };
 
-  home.packages = with pkgs; [
-    swaybg # the wallpaper
-    wl-clipboard # copying and pasting
-    hyprpicker # color picker
-    brightnessctl
-    hyprshot # screen shot
-    wf-recorder # screen recording
-    # audio
-    alsa-utils # provides amixer/alsamixer/...
-    networkmanagerapplet # provide GUI app: nm-connection-editor
-  ];
-
   xdg.configFile =
     let
       mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-      confPath = "${config.home.homeDirectory}/nixos-dotfile/home/desktop/base/desktop/config";
+      confPath = "${config.home.homeDirectory}/nixos-dotfile/home/desktop/base/config";
     in
     {
       # "mako".source = mkSymlink "${confPath}/mako";
       "waybar".source = mkSymlink "${confPath}/waybar";
-      # "wlogout".source = mkSymlink "${confPath}/wlogout";
+      "wlogout".source = mkSymlink "${confPath}/wlogout";
       "hypr/hypridle.conf".source = mkSymlink "${confPath}/hypridle.conf";
     };
 
@@ -60,11 +72,10 @@
 
   # Logout Menu
   programs.wlogout.enable = true;
-  # catppuccin.wlogout.enable = false;
 
   # Hyprland idle daemon
   # services.hypridle.enable = true;
-
+  
   # notification daemon, the same as dunst
   services.mako.enable = true;
 }

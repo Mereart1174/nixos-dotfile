@@ -6,15 +6,17 @@
 }:
 # media - control and enjoy audio/video
 {
-  home.packages =
-    with pkgs;
-    [
-      # audio control
-      pavucontrol
-      playerctl
-      pulsemixer
-      imv # simple image viewer
-    ];
+  home.packages = with pkgs; [
+    ffmpeg-full
+    # audio control
+    pavucontrol
+    playerctl
+    pulsemixer
+    # image
+    imv
+    imagemagick
+    graphviz
+  ];
 
   programs.mpv = {
     enable = true;

@@ -10,8 +10,6 @@
     # packages = [ ... ];
 
     fontconfig = {
-      # User defined default fonts
-      # https://catcat.cc/post/2021-03-07/
       defaultFonts = {
         serif = [
           # 西文: 衬线字体（笔画末端有修饰(衬线)的字体，通常用于印刷。）
@@ -24,24 +22,22 @@
         sansSerif = [
           # 西文: 无衬线字体（指笔画末端没有修饰(衬线)的字体，通常用于屏幕显示）
           "Source Serif 4"
-          # 中文: 黑体
-          "LXGW WenKai" # 霞鹜文楷
-          "Source Han Sans SC" # 思源黑体
+          "LXGW WenKai"
+          "Source Han Sans SC"
           "Source Han Sans TC"
         ];
         # 等宽字体
         monospace = [
           # 中文
-          "Maple Mono NF CN" # 中英文宽度完美 2:1 的字体
-          "Source Han Mono SC" # 思源等宽
+          "Maple Mono NF CN"
+          "Source Han Mono SC"
           "Source Han Mono TC"
-          # 西文
           "JetBrainsMono Nerd Font"
         ];
         emoji = [ "Noto Color Emoji" ];
       };
       antialias = true; # 抗锯齿
-      hinting.enable = false; # 禁止字体微调 - 高分辨率下没这必要
+      hinting.enable = false; # 禁止字体微调 - 高分辨率下不需要
       subpixel = {
         rgba = "rgb"; # IPS 屏幕使用 rgb 排列
       };
