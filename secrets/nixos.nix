@@ -9,6 +9,7 @@
   imports = [ agenix.nixosModules.default ];
   environment.systemPackages = with pkgs; [
     agenix.packages.x86_64-linux.default
+    age
   ];
 
   age.identityPaths = [
@@ -17,10 +18,12 @@
 
   age.secrets = {
     mihomo = {
-      file = ./mihomo.yaml.age;
+      file = ../docs/mihomo/mihomo.yaml.age;
       path = "/home/${myvars.username}/.config/mihomo/mihomo.yaml";
-      owner = "mihomo";
-      mode = "0600";
     };
+    #dae = {
+    #  file = ../docs/dae/dae.yaml.age;
+    #  path = "/home/${myvars.username}/.config/dae/dae.yaml.age";
+    #};
   };
 }
