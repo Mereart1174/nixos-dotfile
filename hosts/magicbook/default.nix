@@ -1,7 +1,6 @@
 { myvars, lib, ... }:
 let
   hostName = "magicbook";
-
 in
 {
   imports = [

@@ -82,7 +82,6 @@
     tree
     gnutar
     rsync
-    agenix
   ];
 
   # BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
