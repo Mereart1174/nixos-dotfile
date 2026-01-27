@@ -39,7 +39,7 @@
     mihomo = {
       enable = true;
       tunMode = false;
-      configFile = "/home/philo/dog-clash.yaml";
+      configFile = config.age.secrets.mihomo.path;
     };
     dae = {
       enable = true;

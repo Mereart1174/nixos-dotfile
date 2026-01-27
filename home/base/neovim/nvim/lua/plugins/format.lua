@@ -5,21 +5,7 @@ return {
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter").setup({
-        ensure_installed = {
-          "bash",
-          "c",
-          "cmake",
-          "dockerfile",
-          "html",
-          "lua",
-          "markdown",
-          "markdown_inline",
-          "python",
-          "rust",
-          "sql",
-          "vim",
-          "vimdoc",
-        },
+        ensure_installed = 'all',
         highlight = { enable = true },
       })
     end,
