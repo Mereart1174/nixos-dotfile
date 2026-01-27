@@ -8,7 +8,7 @@
       # device = "/dev/sda";
       efiSupport = true;
       useOSProber = true;
-      theme = mylib.relativeToRoot "home/desktop/base/desktop/config/CyberEXS";
+      theme = mylib.relativeToRoot "home/desktop/base/config/CyberEXS";
     };
   };
 }

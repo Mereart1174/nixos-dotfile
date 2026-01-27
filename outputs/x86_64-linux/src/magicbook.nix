@@ -18,7 +18,7 @@ let
       (map mylib.relativeToRoot [
         # common
         # "secrets/nixos.nix"
-        "modules/desktop"
+        "system/desktop"
         # host specific
         "hosts/${name}"
       ])

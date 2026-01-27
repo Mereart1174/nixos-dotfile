@@ -5,10 +5,10 @@ tui = 无桌面环境
 ------------------------------------------------------
 
 
-module = 选择你系统的设置和要装的软件及设置
+system = nixox module 系统必装及必要设置，需要 gui 环境时用 module/desktop
 
 hosts = 特定主机的设置
 
-home = 选择你要用tui还是gui环境，core为简安装
+home = homemanager module 可选的软件及其设置，需要 gui 环境时用 home/desktop
 
-outputs = 选择你要用的主机
+outputs = 可使用的主机

@@ -11,10 +11,7 @@ let
   cfgWayland = config.modules.desktop.wayland;
 in
 {
-  imports = mylib.scanPaths ./.
-    ++ [
-    ../base
-  ];
+  imports = mylib.scanPaths ./. ++ [ ../base ];
 
   options.modules.desktop = {
     wayland = {
