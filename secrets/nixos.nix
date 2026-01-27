@@ -21,9 +21,9 @@
       file = ../docs/mihomo/mihomo.yaml.age;
       path = "/home/${myvars.username}/.config/mihomo/mihomo.yaml";
     };
-    #dae = {
-    #  file = ../docs/dae/dae.yaml.age;
-    #  path = "/home/${myvars.username}/.config/dae/dae.yaml.age";
-    #};
+    dae = {
+      file = ../docs/dae/dae.yaml.age;
+      path = "/home/${myvars.username}/.config/dae/dae.yaml.age";
+    };
   };
 }
