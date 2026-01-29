@@ -53,7 +53,12 @@ let
 
   modules-niri = {
     nixos-modules = [
-      { programs.niri.enable = true; }
+      {
+        programs.niri = {
+          enable = true;
+          package = inputs.niri.packages.x86_64-linux.niri-unstable;
+        };
+      }
     ]
     ++ base-modules.nixos-modules;
     home-modules = [

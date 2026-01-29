@@ -13,8 +13,8 @@
     };
 
   programs.waybar = {
-    enable = true;
-    systemd.enable = true;
+    enable = false;
+    systemd.enable = false;
   };
 
   # programs.swaylock.enable = true;
@@ -23,5 +23,5 @@
 
   # services.hypridle.enable = true;
 
-  services.mako.enable = true;
+  # services.mako.enable = true;
 }

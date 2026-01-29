@@ -25,7 +25,7 @@ in
   xdg.configFile =
     let
       mkSymlink = config.lib.file.mkOutOfStoreSymlink;
-      confPath = "${config.home.homeDirectory}/nix-config/home/desktop/base/noctalia";
+      confPath = "${config.home.homeDirectory}/nixos-dotfile/home/desktop/base/noctalia";
     in
     {
       # NOTE: use config dir as noctalia config because config is not only settings.json
