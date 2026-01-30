@@ -30,7 +30,6 @@ nixpkgs.lib.nixosSystem {
           extraSpecialArgs = specialArgs;
           users."${myvars.username}" = {
             imports = home-modules;
-            programs.home-manager.enable = true;
           };
         };
       }

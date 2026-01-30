@@ -25,15 +25,11 @@
     history = {
       save = 10000;
       size = 10000;
-      # path = "$HOME/.config/zsh/zsh_history";
       expireDuplicatesFirst = true;
       ignoreDups = true;
       ignoreSpace = true;
     };
     shellAliases = {
-      # Common
-      # sudo = "doas";
-      # suod = "doas";
       n = "nvim";
       r = "yazi";
       s = "source";
@@ -55,18 +51,17 @@
       hg = "history 1 | grep";
   
       # syu = "home-manager switch --flake $NIX_CONFIG_DIR";
-      syu = "doas nixos-rebuild switch --flake $NIX_CONFIG_DIR#nixos";
+      syu = "sudo nixos-rebuild switch --flake .#magicbook-niri";
       sz = "source ~/.zshrc";
-      nz = "nvim $NIX_CONFIG_DIR/user/config/zsh.nix";
-      na = "nvim $NIX_CONFIG_DIR/user/config/alacritty.nix";
-      nw = "nvim $NIX_CONFIG_DIR/user/extraConfig/wayfire.ini";
-      np = "nvim $NIX_CONFIG_DIR/user/config/default.nix";
-      # nh = "nvim $NIX_CONFIG_DIR/user/extraConfig/hyprland.conf";
+      nf = "nvim flake.nix";
       nl = "neofetch";
-      spnn = "doas nix search nixpkgs";
+      spss = "sudo nix search nixpkgs";
       spq = "ls /nix/store | rg";
-      sc = "sudo systemctl";
+      sc = "systemctl status";
       acpi = "cat /sys/class/power_supply/BAT1/capacity /sys/class/power_supply/BAT1/status";
+
+      cdnix = "cd /home/philo/nixos-dotfile/";
+      cdstm = "cd /home/philo/PL/Rust/stm32/";
     };
   };
 }
