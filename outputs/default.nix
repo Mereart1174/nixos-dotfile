@@ -35,7 +35,7 @@ let
       };
 
       pkgs-x64 = import nixpkgs {
-        nixpkgs.hostPlatform = "x86_64-linux";
+        system = "x86_64-linux";
 
         # To use chrome, we need to allow the installation of non-free software
         config.allowUnfree = true;

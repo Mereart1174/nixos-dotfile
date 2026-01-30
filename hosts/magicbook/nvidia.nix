@@ -14,10 +14,10 @@
   services.xserver.videoDrivers = [ "nvidia" ]; # will install nvidia-vaapi-driver by default
   hardware.nvidia = {
     # Open-source kernel modules are preferred over and planned to steadily replace proprietary modules
-    open = true;
+    open = false;
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/os-specific/linux/nvidia-x11/default.nix
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     # required by most wayland compositors!
     modesetting.enable = true;
