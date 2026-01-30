@@ -39,13 +39,11 @@
     mihomo = {
       enable = true;
       tunMode = false;
-      # configFile = config.age.secrets.mihomo.path;
-      configFile = "/home/philo/dog-clash.yaml";
+      configFile = "/etc/mihomo/mihomo.yaml";
     };
     dae = {
       enable = true;
-      # configFile = config.age.secrets.dae.path;
-      configFile = "/home/philo/clash-config.dae";
+      configFile = "/etc/dae/config.dae";
       assets = with pkgs; [
         v2ray-geoip
         v2ray-domain-list-community

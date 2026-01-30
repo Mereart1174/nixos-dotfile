@@ -30,10 +30,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    preservation = {
-      url = "github:nix-community/preservation";
-    };
-
     # anyrun - a wayland launcher
     anyrun = {
       url = "github:/anyrun-org/anyrun/v25.9.0";

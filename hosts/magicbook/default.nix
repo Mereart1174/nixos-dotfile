@@ -7,8 +7,6 @@ in
     ./hardware-configuration.nix
     ./nvidia.nix
     ./boot.nix
-
-    ./preservation.nix
   ];
 
   # services.sunshine.enable = lib.mkForce true;

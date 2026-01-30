@@ -16,10 +16,8 @@ let
   base-modules = {
     nixos-modules =
       (map mylib.relativeToRoot [
-        # common
         "secrets/nixos.nix"
         "system/desktop"
-        # host specific
         "hosts/${name}"
       ])
       ++ [
@@ -27,16 +25,12 @@ let
         {
           modules.desktop.fonts.enable = true;
           modules.desktop.wayland.enable = true;
-          # modules.secrets.desktop.enable = true;
-          # modules.secrets.preservation.enable = true;
-          # modules.desktop.gaming.enable = true;
+          modules.secrets.desktop.enable = false;
         }
       ];
     home-modules =
       (map mylib.relativeToRoot [
-        # common
         "home/desktop"
-        # host specific
         "hosts/${name}/home.nix"
       ]);
   };
@@ -69,12 +63,10 @@ let
 in
 {
   nixosConfigurations = {
-    # host with hyprland compositor
     "${name}-hyprland" = mylib.nixosSystem (modules-hyprland // args);
     "${name}-niri" = mylib.nixosSystem (modules-niri // args);
   };
 
-  # generate iso image for hosts with desktop environment
   packages = {
     "${name}-hyprland" = inputs.self.nixosConfigurations."${name}-hyprland".config.formats.iso;
     "${name}-niri" = inputs.self.nixosConfigurations."${name}-niri".config.formats.iso;
