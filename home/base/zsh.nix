@@ -54,6 +54,8 @@
       syu = "sudo nixos-rebuild switch --flake .#magicbook-niri";
       sz = "source ~/.zshrc";
       nf = "nvim flake.nix";
+      nz = "nvim /home/philo/nixos-dotfile/home/base/zsh.nix";
+      ndev = "nvim /home/philo/nixos-dotfile/home/base/pkgs-dev.nix";
       nl = "neofetch";
       spss = "sudo nix search nixpkgs";
       spq = "ls /nix/store | rg";
