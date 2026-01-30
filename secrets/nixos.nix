@@ -20,10 +20,12 @@
     mihomo = {
       file = ../docs/mihomo/mihomo.yaml.age;
       path = "/home/${myvars.username}/.config/mihomo/mihomo.yaml";
+      mode = "640";
     };
     dae = {
       file = ../docs/dae/config.dae.age;
       path = "/home/${myvars.username}/.config/dae/config.dae";
+      mode = "640";
     };
   };
 }

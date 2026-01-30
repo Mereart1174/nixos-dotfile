@@ -17,12 +17,12 @@ binds {
     Alt+Shift+Return { spawn "alacritty"; }
 
     // Launcher
-    Mod+D { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+O { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     XF86Search { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
 
     // Locker
-    CTRL+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+    CTRL+Alt+Q { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -191,7 +191,7 @@ binds {
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
+    Ctrl+Alt+0 { fullscreen-window; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".

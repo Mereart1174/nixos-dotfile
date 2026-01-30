@@ -47,7 +47,7 @@
       };
       colors = {
         primary = {
-          background = "#000000";
+          background = "#131621";
           foreground = "#ffe4e1";
         };
         cursor = {
