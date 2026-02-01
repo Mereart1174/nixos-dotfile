@@ -25,12 +25,9 @@
         vicmd_symbol = "[ഒ ](bold yellow)";
       };
       golang.symbol = " ";
-      rust.symbol = "[ ]";
-      lua.symbol = "[ ]";
-      python.symbol = "[ ]";
-      nodejs.symbol = "[ ]";
-      package.symbol = "[ ]";
-      java.symbol = "[ ]";
+      rust.symbol = "🦀 ";
+      lua.symbol = " ";
+      python.symbol = " ";
       cmd_duration = { style = "yellow"; };
       directory = { truncation_length = 3; };
       git_branch = { symbol = " "; };

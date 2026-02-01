@@ -51,19 +51,21 @@
       hg = "history 1 | grep";
   
       # syu = "home-manager switch --flake $NIX_CONFIG_DIR";
-      syu = "sudo nixos-rebuild switch --flake .#magicbook-niri";
-      sz = "source ~/.zshrc";
-      nf = "nvim flake.nix";
+      syu = "sudo nixos-rebuild switch --flake /home/philo/nixos-dotfile#magicbook-niri";
       nz = "nvim /home/philo/nixos-dotfile/home/base/zsh.nix";
       ndev = "nvim /home/philo/nixos-dotfile/home/base/pkgs-dev.nix";
+      cdnix = "cd /home/philo/nixos-dotfile/";
+      cdstm = "cd /home/philo/PL/Rust/stm32/";
+
+      sz = "source ~/.zshrc";
+      nf = "nvim flake.nix";
+      nm = "nvim src/main"
       nl = "neofetch";
       spss = "sudo nix search nixpkgs";
       spq = "ls /nix/store | rg";
       sc = "systemctl status";
       acpi = "cat /sys/class/power_supply/BAT1/capacity /sys/class/power_supply/BAT1/status";
 
-      cdnix = "cd /home/philo/nixos-dotfile/";
-      cdstm = "cd /home/philo/PL/Rust/stm32/";
     };
   };
 }

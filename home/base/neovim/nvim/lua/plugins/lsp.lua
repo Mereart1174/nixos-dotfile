@@ -16,17 +16,10 @@ return {
       "--pch-storage=memory",
       }
     })
-    vim.lsp.config("rust_analyzer", {
-      capabilities = capabilities,
-      settings = {
-        ["rust-analyzer"] = {
-          checkOnSave = { command = "clippy" },
-        }
-      }
-    })
-    vim.lsp.config("pyright", {capabilities = capabilities})
-    vim.lsp.config("bashls", {capabilities = capabilities})
-    vim.lsp.config("marksman", {capabilities = capabilities})
+    vim.lsp.config("rust_analyzer", { capabilities = capabilities })
+    vim.lsp.config("pyright", { capabilities = capabilities })
+    vim.lsp.config("bashls", { capabilities = capabilities })
+    vim.lsp.config("marksman", { capabilities = capabilities })
     vim.lsp.config("ts_ls", { capabilities = capabilities })
     vim.lsp.config("lua_ls", {
       capabilities = capabilities,
