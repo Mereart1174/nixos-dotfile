@@ -52,6 +52,7 @@
   
       # syu = "home-manager switch --flake $NIX_CONFIG_DIR";
       syu = "sudo nixos-rebuild switch --flake /home/philo/nixos-dotfile#magicbook-niri";
+      syut = "sudo nixos-rebuild test --flake /home/philo/nixos-dotfile#magicbook-niri";
       nz = "nvim /home/philo/nixos-dotfile/home/base/zsh.nix";
       ndev = "nvim /home/philo/nixos-dotfile/home/base/pkgs-dev.nix";
       cdnix = "cd /home/philo/nixos-dotfile/";
@@ -59,8 +60,8 @@
 
       sz = "source ~/.zshrc";
       nf = "nvim flake.nix";
-      nm = "nvim src/main"
-      nl = "neofetch";
+      nm = "nvim src/main";
+      nl = "fastfetch";
       spss = "sudo nix search nixpkgs";
       spq = "ls /nix/store | rg";
       sc = "systemctl status";

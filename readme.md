@@ -12,3 +12,11 @@ hosts = 特定主机的设置
 home = homemanager module 可选的软件及其设置，需要 gui 环境时用 home/desktop
 
 outputs = 可使用的主机
+
+绝对路径
+
+./home/base/zsh.nix
+
+./system/desktop/misc.nix
+
+./home/base/fastfetch.nix

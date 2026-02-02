@@ -5,7 +5,7 @@
 {
   services.udev = {
     packages = with pkgs; [
-      probe-rs
+      probe-rs-tools
     ];
   };
 

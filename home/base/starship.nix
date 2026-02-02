@@ -10,7 +10,7 @@
       add_newline = false;
       username.disabled = false;
       format = lib.concatStrings [
-        "[╭─ ](bold black)[ ](#ffd866)"
+        "[╭─ ](bold black)[❆ ](#ffd866)"
         "$all"
         "$fill"
         "$time[ ♍](#bd93f9)$python"
