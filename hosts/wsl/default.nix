@@ -1,12 +1,11 @@
 { myvars, lib, ... }:
 let
-  hostName = "magicbook";
+  hostName = "wsl";
 in
 {
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
-    ./boot.nix
   ];
 
   # services.sunshine.enable = lib.mkForce true;

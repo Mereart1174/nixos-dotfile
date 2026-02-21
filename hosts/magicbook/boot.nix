@@ -10,5 +10,6 @@
       useOSProber = true;
       theme = mylib.relativeToRoot "home/desktop/base/config/CyberEXS";
     };
+    timeout = lib.mkForce 10;
   };
 }

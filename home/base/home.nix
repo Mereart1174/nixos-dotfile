@@ -26,6 +26,6 @@ rec {
     sessionVariables = {
       DIRENV_LOG_FORMAT = "";
     };
-    stateVersion = "25.05";
+    stateVersion = "26.05";
   };
 }

@@ -4,23 +4,6 @@
   ...
 }:
 {
-  ###################################################################################
-  #
-  #  Virtualisation - Libvirt(QEMU/KVM) / Docker / LXD / WayDroid
-  #
-  ###################################################################################
-
-  # Enable nested virtualization, required by security containers and nested vm.
-  # This should be set per host in /hosts, not here.
-  #
-  ## For AMD CPU, add "kvm-amd" to kernelModules.
-  # boot.kernelModules = ["kvm-amd"];
-  # boot.extraModprobeConfig = "options kvm_amd nested=1";  # for amd cpu
-  #
-  ## For Intel CPU, add "kvm-intel" to kernelModules.
-  # boot.kernelModules = ["kvm-intel"];
-  # boot.extraModprobeConfig = "options kvm_intel nested=1"; # for intel cpu
-
   boot.kernelModules = [ "vfio-pci" ];
 
   services.flatpak.enable = true;
@@ -44,9 +27,6 @@
     oci-containers = {
       backend = "podman";
     };
-
-    # Usage: https://wiki.nixos.org/wiki/Waydroid
-    # waydroid.enable = true;
 
     # libvirtd = {
     #   enable = true;
