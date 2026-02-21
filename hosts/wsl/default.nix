@@ -4,7 +4,6 @@ let
 in
 {
   imports = [
-    ./hardware-configuration.nix
     ./nvidia.nix
   ];
 

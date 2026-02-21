@@ -50,9 +50,10 @@
       lsss = "eza --icons --group-directories-first --tree";
       hg = "history 1 | grep";
   
-      # syu = "home-manager switch --flake $NIX_CONFIG_DIR";
-      syu = "sudo nixos-rebuild switch --flake /home/philo/nixos-dotfile#magicbook-niri";
-      syut = "sudo nixos-rebuild test --flake /home/philo/nixos-dotfile#magicbook-niri";
+      syun = "sudo nixos-rebuild switch --flake /home/philo/nixos-dotfile#magicbook-niri";
+      syunt = "sudo nixos-rebuild test --flake /home/philo/nixos-dotfile#magicbook-niri";
+      syu = "sudo nixos-rebuild switch --flake /home/philo/nixos-dotfile#wsl-nixos";
+      syut = "sudo nixos-rebuild test --flake /home/philo/nixos-dotfile#wsl-nixos";
       nz = "nvim /home/philo/nixos-dotfile/home/base/zsh.nix";
       ndev = "nvim /home/philo/nixos-dotfile/home/base/pkgs-dev.nix";
       cdnix = "cd /home/philo/nixos-dotfile/";
