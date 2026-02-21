@@ -29,7 +29,6 @@ let
 
   modules-wsl = {
     nixos-modules = [
-      nixos-wsl.nixosModules.default
     ]
     ++ base-modules.nixos-modules;
     home-modules = [
