@@ -6,8 +6,6 @@
 {
   boot.kernelModules = [ "vfio-pci" ];
 
-  services.flatpak.enable = true;
-
   virtualisation = {
     docker.enable = false;
     podman = {
