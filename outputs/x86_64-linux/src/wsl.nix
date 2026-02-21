@@ -33,7 +33,6 @@ let
     home-modules = [
     ]
     ++ base-modules.home-modules;
-    [ nixos-wsl.nixosModules.default ];
   };
 
 in
