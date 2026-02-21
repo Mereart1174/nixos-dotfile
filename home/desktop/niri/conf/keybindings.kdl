@@ -69,7 +69,7 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
-    // Mod+O repeat=false { toggle-overview; }
+    Mod+G repeat=false { toggle-overview; }
 
     Mod+Left { focus-column-left; }
     Mod+Down { focus-window-down; }
@@ -128,8 +128,8 @@ binds {
 
     "Mod+Page_Down"      { focus-workspace-down; }
     "Mod+Page_Up" { focus-workspace-up; }
-    Mod+U { focus-workspace-down; }
-    Mod+I { focus-workspace-up; }
+    Mod+D { focus-workspace-down; }
+    Mod+U { focus-workspace-up; }
     "Mod+Ctrl+Page_Down" { move-column-to-workspace-down; }
     "Mod+Ctrl+Page_Up" { move-column-to-workspace-up; }
     Mod+Ctrl+U { move-column-to-workspace-down; }
@@ -190,7 +190,7 @@ binds {
     // Mod+R { switch-preset-column-width-back; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
-    Mod+F { maximize-column; }
+    Mod+M { maximize-column; }
     Ctrl+Alt+0 { fullscreen-window; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
@@ -216,7 +216,7 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V       { toggle-window-floating; }
+    Mod+F       { toggle-window-floating; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
@@ -254,7 +254,7 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 
     // Utility shortcuts
-    Mod+Shift+V { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+    Mod+V { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
     Mod+C { spawn "noctalia-shell" "ipc" "call" "launcher" "calculator"; }
 
     Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
