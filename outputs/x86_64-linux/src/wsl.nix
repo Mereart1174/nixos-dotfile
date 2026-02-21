@@ -8,7 +8,7 @@
   mylib,
   system,
   genSpecialArgs,
-  niri,
+  nixos-wsl,
   ...
 }@args:
 let
@@ -29,12 +29,12 @@ let
 
   modules-wsl = {
     nixos-modules = [
+      nixos-wsl.nixosModules.default
     ]
     ++ base-modules.nixos-modules;
     home-modules = [
     ]
     ++ base-modules.home-modules;
-    nixos-wsl.nixosModules.wsl;
   };
 
 in
