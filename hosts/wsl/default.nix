@@ -12,7 +12,7 @@ in
 
   networking = {
     inherit hostName;
-    networkmanager.enable = true;
+    networkmanager.enable = lib.mkForce false;
     # useDHCP = false;
     # firewall.enable = false;
   };

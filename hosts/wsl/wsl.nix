@@ -6,5 +6,6 @@
 
   wsl = {
     enable = true;
+    defaultUser = "philo";
   };
 }

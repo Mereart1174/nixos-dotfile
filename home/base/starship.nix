@@ -18,7 +18,7 @@
         "$shell[╰─](bold black)"
         "$character"
       ];
-      scan_timeout = 10;
+      scan_timeout = 200;
       character = {
         success_symbol = "[ഒ ](bold green)";
         error_symbol = "[ഒ ](bold red)";
