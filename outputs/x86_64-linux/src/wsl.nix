@@ -23,7 +23,6 @@ let
     home-modules =
       (map mylib.relativeToRoot [
         "home/base"
-        "hosts/${name}/home.nix"
       ]);
   };
 

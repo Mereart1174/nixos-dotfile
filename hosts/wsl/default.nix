@@ -5,6 +5,7 @@ in
 {
   imports = [
     ./nvidia.nix
+    ./wsl.nix
   ];
 
   # services.sunshine.enable = lib.mkForce true;
