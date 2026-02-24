@@ -6,6 +6,22 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     dotDir = "${config.xdg.configHome}/zsh";
+    initContent = ''
+      cp2win() {
+        if [ -z "$1" ]; then
+          echo "错误: 请输入文件名。用法: wsl2win <filename>"
+          return 1
+        fi
+
+        if [ -f "$1" ]; then
+          cat "$1" | iconv -f utf-8 -t gb2312 | clip.exe
+          echo "已成功复制 '$1' 的内容到 Windows 剪贴板。"
+        else
+          echo "错误: 文件 '$1' 不存在。"
+          return 1
+        fi
+      }
+    '';
     completionInit = ''
       bindkey -e
       autoload -Uz compinit && compinit -u
@@ -59,7 +75,7 @@
       cdnix = "cd /home/philo/nixos-dotfile/";
       cdstm = "cd /home/philo/PL/Rust/stm32/";
 
-      sz = "source ~/.zshrc";
+      sz = "source ~/.config/zsh/.zshrc";
       nf = "nvim flake.nix";
       nm = "nvim src/main";
       nl = "fastfetch";
@@ -67,7 +83,6 @@
       spq = "ls /nix/store | rg";
       sc = "systemctl status";
       acpi = "cat /sys/class/power_supply/BAT1/capacity /sys/class/power_supply/BAT1/status";
-
     };
   };
 }
