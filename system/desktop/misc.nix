@@ -51,8 +51,5 @@
     };
   };
 
-  programs = {
-    # dconf is a low-level configuration system.
-    dconf.enable = true;
-  };
+  programs.dconf.enable = true;
 }
