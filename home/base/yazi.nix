@@ -16,6 +16,7 @@
         { on = [ "g" "h" ]; run = "cd ~"; desc = "跳转到家目录"; }
         { on = [ "g" "n" ]; run = "cd ~/nixos-dotfile"; desc = "跳转到NixOS配置目录"; }
         { on = [ "g" "c" ]; run = "cd ~/.config"; desc = "跳转到config目录"; }
+        { on = [ "g" "f" ]; run = "follow"; desc = "跟随符号链接"; }
       ];
     };
   };

@@ -4,14 +4,7 @@
   pkgs,
   ...
 }:
-###############################################################################
-#
-#  AstroNvim's configuration and all its dependencies(lsp, formatter, etc.)
-#
-#e#############################################################################
 let
-  # the path to nvim directory
-  # to make this symlink work, we need to git clone this repo to your home directory.
   configPath = "${config.home.homeDirectory}/nixos-dotfile/home/base/neovim/nvim";
 in
 {
