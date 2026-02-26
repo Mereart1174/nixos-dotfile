@@ -15,22 +15,22 @@ vim.keymap.set("n", "gs", function()
   local line = vim.api.nvim_get_current_line()
   local col = vim.api.nvim_win_get_cursor(0)[2] -- 0-indexed
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local opts = { buffer = args.buf }
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gr", require('telescope.builtin').lsp.buf.references, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-    
-    -- 开启 0.10+ 原生内联提示 (对 C 语言查看宏展开和 Rust 类型推断极有帮助)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client.supports_method("textDocument/inlayHint") then
-      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-    end
-  end,
-})
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+      local opts = { buffer = args.buf }
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      vim.keymap.set("n", "gr", require('telescope.builtin').lsp.buf.references, opts)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+      
+      -- 开启 0.10+ 原生内联提示 (对 C 语言查看宏展开和 Rust 类型推断极有帮助)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client and client.supports_method("textDocument/inlayHint") then
+        vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+      end
+    end,
+  })
 
   -- True 和 False 互转
   local map = {
@@ -59,3 +59,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     print("Cursor is not on a boolean value")
   end
 end, { desc = "精确切换光标下的布尔值" })
+
+
+-- 文件内全局替换
+vim.keymap.set("n", "<leader>r", function()
+  -- 获取光标下的单词作为默认值
+  local old_word = vim.fn.expand("<cword>")
+  
+  -- 弹出输入框获取新单词
+  vim.ui.input({ prompt = '替换 "' .. old_word .. '" 为: ', default = "" }, function(new_word)
+    if new_word and new_word ~= "" then
+      -- 执行全局替换命令
+      -- %s: 全局 / g: 全部匹配 / c: 确认（可选）
+      vim.cmd(string.format("%%s/%s/%s/g", old_word, new_word))
+      print(string.format("已将 %s 替换为 %s", old_word, new_word))
+    end
+  end)
+end, { desc = "全局替换光标下的单词" })

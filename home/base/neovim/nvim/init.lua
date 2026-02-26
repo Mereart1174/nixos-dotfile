@@ -15,6 +15,12 @@ if not pcall(require, "lazy") then
   vim.cmd.quit()
 end
 
+function _G.setl(options)
+    for k, v in pairs(options) do
+        vim.opt_local[k] = v
+    end
+end
+
 require("core.option")
 require("core.event")
 require("core.globel")
