@@ -14,6 +14,7 @@ return {
       "--header-insertion=iwyu",
       "--completion-style=detailed",
       "--pch-storage=memory",
+      "--compile-commands-dir=build",
       }
     })
     vim.lsp.config("rust_analyzer", { capabilities = capabilities })
@@ -52,7 +53,6 @@ return {
       "marksman",
       "nil",
     }
-    
     for _, server in ipairs(servers) do
       vim.lsp.enable(server)
     end

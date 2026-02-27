@@ -2,8 +2,14 @@ vim.keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 vim.keymap.set("n", "<leader>q", ":q<CR>", { silent = true })
 vim.keymap.set("n", "<leader>wq", ":wq<CR>", { silent = true })
 
+vim.keymap.set('n', '<C-l>', 'gcc', { remap = true })
+vim.keymap.set("n", "gd", require('telescope.builtin').lsp_definitions, {})
+
+
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "显示浮窗错误信息" })
+
 vim.keymap.set("n", "<leader>l", "<CMD>Lazy<CR>", { desc = "打开 Lazy 插件管理器" })
-vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>", { desc = "打开侧边栏目录树" })
+vim.keymap.set("n", "<leader>t", "<CMD>NvimTreeToggle<CR>", { desc = "打开侧边栏目录树" })
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "打开 Oil 文件浏览器" })
 vim.keymap.set("n", "<leader>o", function()
   require("oil").toggle_float()
@@ -14,23 +20,6 @@ vim.keymap.set("n", "gs", function()
   -- 获取当前行内容、光标所在行号和列号
   local line = vim.api.nvim_get_current_line()
   local col = vim.api.nvim_win_get_cursor(0)[2] -- 0-indexed
-
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      local opts = { buffer = args.buf }
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-      vim.keymap.set("n", "gr", require('telescope.builtin').lsp.buf.references, opts)
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-      
-      -- 开启 0.10+ 原生内联提示 (对 C 语言查看宏展开和 Rust 类型推断极有帮助)
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if client and client.supports_method("textDocument/inlayHint") then
-        vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-      end
-    end,
-  })
 
   -- True 和 False 互转
   local map = {
@@ -62,10 +51,9 @@ end, { desc = "精确切换光标下的布尔值" })
 
 
 -- 文件内全局替换
-vim.keymap.set("n", "<leader>r", function()
+vim.keymap.set("n", "<leader>rp", function()
   -- 获取光标下的单词作为默认值
   local old_word = vim.fn.expand("<cword>")
-  
   -- 弹出输入框获取新单词
   vim.ui.input({ prompt = '替换 "' .. old_word .. '" 为: ', default = "" }, function(new_word)
     if new_word and new_word ~= "" then
