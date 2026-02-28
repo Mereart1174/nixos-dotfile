@@ -52,4 +52,15 @@
   };
 
   programs.dconf.enable = true;
+
+  environment.sessionVariables = {
+    INPUT_METHOD = "fcitx";
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    SDL_IM_MODULE = "fcitx";
+  };
+
+  # 确保 xdg autostart 在 Wayland 下生效
+  services.xserver.desktopManager.runXdgAutostartIfNone = true;
 }
