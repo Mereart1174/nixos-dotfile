@@ -129,11 +129,11 @@
                 {
                     "deviceNativePath": "",
                     "displayMode": "alwaysShow",
-                    "hideIfNotDetected": true,
+                    "hideIfNotDetected": false,
                     "id": "Battery",
                     "showNoctaliaPerformance": true,
                     "showPowerProfiles": true,
-                    "warningThreshold": 30
+                    "warningThreshold": 20
                 },
                 {
                     "displayMode": "alwaysShow",
