@@ -5,9 +5,9 @@
     type = "fcitx5";
     fcitx5.waylandFrontend = true;
     fcitx5.addons = with pkgs; [
-      qt6Packages.fcitx5-configtool
+      # qt6Packages.fcitx5-configtool
       fcitx5-gtk
-      fcitx5-fluent
+      # fcitx5-fluent
 
       (fcitx5-rime.override {
         rimeDataPkgs = [
@@ -43,4 +43,23 @@
         name: "孤寺／Lost Temple"
         text_color: 0xe8f3f6
     '';
+  home.file.".config/fcitx5/conf/classicui.conf".text = ''
+    Vertical Candidate List=False
+    WheelForPaging=True
+    Font="Maple Mono NF CN 18"
+    MenuFont="Maple Mono NF CN 18"
+    TrayFont="Maple Mono NF CN 18"
+    TrayOutlineColor=#000000
+    TrayTextColor=#ffffff
+    PreferTextIcon=False
+    ShowLayoutNameInIcon=True
+    UseInputMethodLanguageToDisplayText=True
+    Theme=default-dark
+    DarkTheme=default-dark
+    UseDarkTheme=False
+    UseAccentColor=True
+    PerScreenDPI=False
+    ForceWaylandDPI=0
+    EnableFractionalScale=True
+  '';
 }
