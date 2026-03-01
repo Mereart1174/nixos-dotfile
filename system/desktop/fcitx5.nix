@@ -21,9 +21,15 @@
     fcitx5.addons = with pkgs; [
       qt6Packages.fcitx5-configtool # GUI for fcitx5
       fcitx5-gtk # gtk im module
+      fcitx5-fluent
 
       # Chinese
-      fcitx5-rime # for flypy chinese input method
+      # fcitx5-rime # for flypy chinese input method
+      (fcitx5-rime.override {
+        rimeDataPkgs = [
+          pkgs.rime-ice
+        ];
+      })
     ];
   };
 }
