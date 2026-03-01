@@ -30,7 +30,7 @@
       "style/color_scheme": "aalost_temple"
   '';
 
-  home.file.".local/share/fcitx5/rime/weasel.custom.yaml".text = ''
+  home.file.".local/share/fcitx5/rime/fcitx5_custom_theme.yaml".text = ''
     preset_color_schemes:
       aalost_temple:
         author: "<chen.sst@gmail.com>, based on ir_black"
@@ -43,7 +43,7 @@
         name: "孤寺／Lost Temple"
         text_color: 0xe8f3f6
     '';
-  home.file.".config/fcitx5/conf/classicui.conf".text = ''
+  xdg.configFile."fcitx5/conf/classicui.conf".text = ''
     Vertical Candidate List=False
     WheelForPaging=True
     Font="Maple Mono NF CN 18"
@@ -53,7 +53,7 @@
     TrayTextColor=#ffffff
     PreferTextIcon=False
     ShowLayoutNameInIcon=True
-    UseInputMethodLanguageToDisplayText=True
+    UseInputMethodLanguageToDisplayText=False
     Theme=default-dark
     DarkTheme=default-dark
     UseDarkTheme=False
@@ -61,5 +61,7 @@
     PerScreenDPI=False
     ForceWaylandDPI=0
     EnableFractionalScale=True
+    PreferTextIcon=False
+    PreeditInApplication=False
   '';
 }

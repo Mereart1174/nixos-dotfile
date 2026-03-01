@@ -5,13 +5,29 @@
 
   boot = {
     initrd = {
-      availableKernelModules = [ "xhci_pci" "nvme" "thunderbolt" "usbhid" "usb_storage" "sd_mod"];
+      availableKernelModules = [
+        "xhci_pci"
+        "nvme"
+        "thunderbolt"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+      ];
       kernelModules = [ ];
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "kvm-intel" ];
-    kernelParams = [ "i915.enable_psr=0" ];
+    kernelModules = [
+      "kvm-intel"
+    ];
+    kernelParams = [
+      "i915.enable_psr=0"
+      "quiet"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
+    ];
     extraModulePackages = [ ];
+    consoleLogLevel = 0;
   };
 
   fileSystems."/" =
