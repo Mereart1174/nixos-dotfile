@@ -3,8 +3,6 @@ vim.keymap.set("n", "<leader>q", ":q<CR>", { silent = true })
 vim.keymap.set("n", "<leader>wq", ":wq<CR>", { silent = true })
 
 vim.keymap.set('n', '<C-l>', 'gcc', { remap = true })
-vim.keymap.set("n", "gd", require('telescope.builtin').lsp_definitions, {})
-
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "显示浮窗错误信息" })
 
@@ -14,6 +12,8 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "打开 Oil 文件浏览器" }
 vim.keymap.set("n", "<leader>o", function()
   require("oil").toggle_float()
 end, { desc = "浮动窗口打开 Oil" })
+
+vim.keymap.set('n', '<leader>mr', '<cmd>RenderMarkdown toggle<cr>', { desc = 'Toggle markdown rendering', silent = true })
 
 -- 切换 ture 和 false
 vim.keymap.set("n", "gs", function()
