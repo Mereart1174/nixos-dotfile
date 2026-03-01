@@ -27,5 +27,20 @@
         "menu/page_size": 7
       schema_list:
         - schema: rime_ice
+      "style/color_scheme": "aalost_temple"
   '';
+
+  home.file.".local/share/fcitx5/rime/weasel.custom.yaml".text = ''
+    preset_color_schemes:
+      aalost_temple:
+        author: "<chen.sst@gmail.com>, based on ir_black"
+        back_color: 0x444444
+        border_color: 0x444444
+        hilited_back_color: 0x222222
+        hilited_candidate_back_color: 0x82e6ca
+        hilited_candidate_text_color: 0x000000
+        hilited_text_color: 0x82e6ca
+        name: "孤寺／Lost Temple"
+        text_color: 0xe8f3f6
+    '';
 }
