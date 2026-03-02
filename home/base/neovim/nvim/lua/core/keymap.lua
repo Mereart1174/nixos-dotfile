@@ -1,8 +1,8 @@
-vim.keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
-vim.keymap.set("n", "<leader>q", ":q<CR>", { silent = true })
-vim.keymap.set("n", "<leader>wq", ":wq<CR>", { silent = true })
+vim.keymap.set("n", "<leader>w", ":w<CR>", { silent = true }, { desc = "保存" })
+vim.keymap.set("n", "<leader>q", ":q<CR>", { silent = true }, { desc = "退出" })
+vim.keymap.set("n", "<leader>wq", ":wq<CR>", { silent = true }, { desc = "保存并退出" })
 
-vim.keymap.set('n', '<C-l>', 'gcc', { remap = true })
+vim.keymap.set('n', '<C-l>', 'gcc', { remap = true }, { desc = "注释" })
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "显示浮窗错误信息" })
 
@@ -13,7 +13,7 @@ vim.keymap.set("n", "<leader>o", function()
   require("oil").toggle_float()
 end, { desc = "浮动窗口打开 Oil" })
 
-vim.keymap.set('n', '<leader>md', '<cmd>RenderMarkdown toggle<cr>', { desc = 'Toggle markdown rendering', silent = true })
+vim.keymap.set('n', "<leader>md", "<cmd>RenderMarkdown toggle<cr>", { desc = "Toggle markdown rendering", silent = true })
 
 -- 切换 ture 和 false
 vim.keymap.set("n", "gs", function()
@@ -55,12 +55,12 @@ vim.keymap.set("n", "<leader>rp", function()
   -- 获取光标下的单词作为默认值
   local old_word = vim.fn.expand("<cword>")
   -- 弹出输入框获取新单词
-  vim.ui.input({ prompt = '替换 "' .. old_word .. '" 为: ', default = "" }, function(new_word)
+  vim.ui.input({ prompt = '替换全部的 "' .. old_word .. '" 为: ', default = "" }, function(new_word)
     if new_word and new_word ~= "" then
       -- 执行全局替换命令
       -- %s: 全局 / g: 全部匹配 / c: 确认（可选）
       vim.cmd(string.format("%%s/%s/%s/g", old_word, new_word))
-      print(string.format("已将 %s 替换为 %s", old_word, new_word))
+      print(string.format("已将全部的 %s 替换为 %s", old_word, new_word))
     end
   end)
 end, { desc = "全局替换光标下的单词" })
