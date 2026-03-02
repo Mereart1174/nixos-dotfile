@@ -13,7 +13,7 @@ vim.keymap.set("n", "<leader>o", function()
   require("oil").toggle_float()
 end, { desc = "浮动窗口打开 Oil" })
 
-vim.keymap.set('n', '<leader>mr', '<cmd>RenderMarkdown toggle<cr>', { desc = 'Toggle markdown rendering', silent = true })
+vim.keymap.set('n', '<leader>md', '<cmd>RenderMarkdown toggle<cr>', { desc = 'Toggle markdown rendering', silent = true })
 
 -- 切换 ture 和 false
 vim.keymap.set("n", "gs", function()
