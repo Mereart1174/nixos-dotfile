@@ -64,3 +64,16 @@ vim.keymap.set("n", "<leader>rp", function()
     end
   end)
 end, { desc = "全局替换光标下的单词" })
+
+vim.keymap.set("n", "<leader>`", function()
+  local line = vim.fn.getline(".")
+  local indent = line:match("^%s*")
+  local content = line:sub(#indent + 1)
+  if content:match("^`.*`$") then
+    content = content:sub(2, -2)
+  else
+    content = "`" .. content .. "`"
+  end
+
+  vim.fn.setline(".", indent .. content)
+end, { desc = "markdown 单行转代码块" })
