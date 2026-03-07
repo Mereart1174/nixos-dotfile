@@ -72,7 +72,7 @@
       syut = "sudo nixos-rebuild test --flake /home/philo/nixos-dotfile#wsl-nixos";
       nz = "nvim /home/philo/nixos-dotfile/home/base/zsh.nix";
       ndev = "nvim /home/philo/nixos-dotfile/home/base/pkgs-dev.nix";
-      cdnix = "cd /home/philo/nixos-dotfile/";
+      cdos = "cd /home/philo/nixos-dotfile/";
       cdnvim = "cd /home/philo/nixos-dotfile/home/base/neovim/nvim/";
       cdstm = "cd /home/philo/PL/Rust/stm32/";
 

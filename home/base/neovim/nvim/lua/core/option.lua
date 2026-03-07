@@ -10,6 +10,8 @@ o.listchars = {
   trail = "·", -- 行尾多余空格
 }
 
+o.hlsearch = true
+o.incsearch = true
 o.ignorecase = true
 o.smartcase = true
 
@@ -18,3 +20,9 @@ o.cursorline = true
 
 -- 持久化撤销历史
 o.undofile = true
+
+o.whichwrap = "b,s,<,>,[,],h,l"
+o.virtualedit = "onemore"
+
+-- 光标移动上下文
+o.scrolloff = 5
