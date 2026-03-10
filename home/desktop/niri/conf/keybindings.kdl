@@ -228,6 +228,7 @@ binds {
     // Utility shortcuts
     Mod+V { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
     Mod+S { spawn "noctalia-shell" "ipc" "call" "wallpaper" "random"; }
+    Mod+N { spawn "noctalia-shell" "ipc" "call" "network" "togglePanel"; }
 
     Mod+P { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
     Mod+E { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
