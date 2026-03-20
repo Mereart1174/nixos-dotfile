@@ -55,11 +55,15 @@ vim.keymap.set("n", "<leader>rp", function()
   -- 获取光标下的单词作为默认值
   local old_word = vim.fn.expand("<cword>")
   -- 弹出输入框获取新单词
-  vim.ui.input({ prompt = '替换全部的 "' .. old_word .. '" 为: ', default = "" }, function(new_word)
+  vim.ui.input({
+    prompt = '替换全部的 "' .. old_word .. '" 为: ',
+    default = ""
+  }, function(new_word)
     if new_word and new_word ~= "" then
-      -- 执行全局替换命令
-      -- %s: 全局 / g: 全部匹配 / c: 确认（可选）
-      vim.cmd(string.format("%%s/%s/%s/g", old_word, new_word))
+      local escaped = vim.fn.escape(old_word, "\\/.*$^~[]")
+      local pattern = "\\<" .. escaped .. "\\>"
+      local cmd = string.format("%%s/%s/%s/g", pattern, new_word)
+      vim.cmd(cmd)
       print(string.format("已将全部的 %s 替换为 %s", old_word, new_word))
     end
   end)
